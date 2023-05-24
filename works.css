@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,700;1,800&display=swap');
+
+body{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+   font-family: "Poppins";
+}
+header{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A0E64;
+    position: fixed;
+    z-index: 1;
+}
+header img{
+    width: 150px;
+    margin-left: 80px;
+}
+nav ul{
+    display: flex;
+    gap:80px;
+    margin-right: 150px;
+}
+nav ul li{
+    list-style: none;
+}
+nav ul li a{
+    text-decoration: none;
+    color:aliceblue;
+    font-size:1.1rem;
+    transition:.3s linear;
+}
+nav ul li a:hover{
+    color:#29B0F0;
+}
+.bi-list{
+    color:aliceblue;
+    font-size:2.5rem;
+}
+.toggle-icon{
+    display: none;
+}
+main{
+    height: 2200px;
+    width:100%;
+    background-image: linear-gradient(to bottom, #150E5B,#030210);
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+main h2{
+    position: absolute;
+    color: aliceblue;
+    top:100px;
+    font-size: 2rem;
+
+}
+.video{
+    position: absolute;
+    top:250px;
+}
+main span::after{
+    display: block;
+    content: '';
+    width: 150px;
+    height: 3px;
+    background: #29B0F0;
+    position: absolute;
+  
+    left: 45%;
+    top: 175px;
+}
+main img{
+    width:250px;
+}
+.contends{
+    display: flex;
+    padding: 100px 300px;
+    flex-direction: column;
+    position: absolute;
+    top:600px;
+    left: 200px;
+    color: aliceblue;
+
+}
+.contends span::after{
+    display: block;
+    content: '';
+    width: 100px;
+    height: 2px;
+    background: #29B0F0;
+    position: absolute;
+  
+    left: 330px;
+    top: 160px;
+}
+.contends h3{
+    font-size: 1.3rem;
+}
+.contends p{
+    line-height: 3;
+}
+.contends img{
+    margin-top: 80px;
+    transition: transform 0.3s linear;
+}
+.contends img:hover{
+    transform: scale(1.1);
+}
+
+@media (max-width:567px) {
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    nav ul{
+        display: flex;
+        flex-direction: column;
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 140px;
+        line-height: 4;
+        background-color:#150E5B;
+       width:100%;
+       transform: translateX(100%);
+       transition:transform linear 0.5s;
+    }
+    .toggle-icon{
+        display: block;
+        margin-left: 130px;
+    }
+    .is-active{
+        display:block;
+        transform: translateX(0%);
+       
+    }
+    header img{
+        width: 150px;
+        margin-left: -30px;
+    }
+    .video iframe{
+        width: 320px;
+        height:240px
+    }
+    main span::after{
+        display: block;
+        content: '';
+        width: 150px;
+        height: 3px;
+        background: #29B0F0;
+        position: absolute;
+      
+        left: 30%;
+        top: 175px;
+    }
+    .contends{
+        display: flex;
+        padding: 100px 50px;
+        flex-direction: column;
+        position: absolute;
+        top:500px;
+        left: 0;
+        color: aliceblue;
+    
+    }
+    main{
+        height: 2200px;
+    }
+    .contends span::after{
+        display: block;
+        content: '';
+        width: 100px;
+        height: 2px;
+        background: #29B0F0;
+        position: absolute;
+      
+        left: 80px;
+        top: 160px;
+    }
+    .contends p{
+        line-height: 2;
+        font-size: .8rem;
+    }
+}

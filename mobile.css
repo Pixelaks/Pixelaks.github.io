@@ -1,0 +1,201 @@
+@media (max-width:568px) {
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 140px;
+    line-height: 4;
+    background-color: #150E5B;
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform linear 0.5s;
+  }
+
+  header img {
+    width: 150px;
+    margin-left: -30px;
+  }
+
+  main {
+    width: 100%;
+    height: 500px;
+    background-image: url("Images/5218345.jpg");
+    background-size: cover;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    position: relative;
+  }
+
+  main .hero-img {
+    width: 300px;
+    margin-bottom: 100px;
+  }
+
+  main .hero-title {
+    padding: 20px 30px;
+    position: absolute;
+    bottom: 70px;
+
+  }
+
+  main .hero-title p {
+    color: aliceblue;
+    font-size: .8rem;
+    line-height: 2;
+    text-align: center;
+  }
+
+  section {
+    position: relative;
+    background-image: linear-gradient(to bottom, #150E5B, #030210);
+    width: 100%;
+    height: 3400px;
+  }
+
+  .section-heading {
+    position: absolute;
+    margin-top: 50px;
+    display: flex;
+    margin-left: 15%;
+  }
+
+  .section-heading span::after {
+    display: block;
+    content: '';
+    width: 150px;
+    height: 3px;
+    background: #29B0F0;
+    position: absolute;
+    bottom: 15px;
+    left: 55px;
+  }
+
+  .games h2 {
+    margin-left: 40px;
+
+  }
+
+  .games span::after {
+    display: block;
+    content: '';
+    width: 100px;
+    height: 3px;
+    background: #29B0F0;
+    position: absolute;
+    top: 73px;
+    left: 50px;
+  }
+
+  .games-card {
+
+    width: 250px;
+    height: 350px;
+    border: solid 3px #29B0F0;
+    border-radius: 20px;
+    margin-left: 60px;
+    margin-top: 50px;
+    display: block;
+    position: relative;
+
+  }
+  .games-card4{
+    display: none;
+  }
+  .projects {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+
+
+    top: 1600px;
+  }
+
+  .projects-card {
+
+    width: 250px;
+    height: 300px;
+    border: solid 3px #29B0F0;
+    border-radius: 20px;
+    margin-left: 60px;
+    margin-top: 50px;
+    display: block;
+    position: relative;
+  }
+
+  .projects span::after {
+    display: block;
+    content: '';
+    width: 100px;
+    height: 3px;
+    background: #29B0F0;
+    position: absolute;
+    top: 73px;
+    left: 120px;
+  }
+
+  footer {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+
+
+    top: 2800px;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .icons ul {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+    margin-left: 10px;
+  }
+
+  .contact {
+
+    display: flex;
+    color: aliceblue;
+    align-items: center;
+    gap: 10px;
+    margin-left: 40px;
+  }
+
+  .toggle-icon {
+    display: block;
+    margin-left: 130px;
+  }
+
+  .is-active {
+    display: block;
+    transform: translateX(0%);
+
+  }
+
+  header {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A0E64;
+    position: fixed;
+    z-index: 1;
+  }
+
+}
