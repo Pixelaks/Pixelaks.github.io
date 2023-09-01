@@ -12,12 +12,7 @@ import Terms from './components/Terms';
 import Privacy from './components/Privacy';
 import './styles/mobile.css'
 
-import React, { useEffect } from 'react';
-
 function App() {
-  useEffect(() => {
-    document.title = "Pixelaks Games";
-  }, []);
   return (
     <div className="App">
       <Routes>
