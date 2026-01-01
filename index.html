@@ -328,27 +328,44 @@
 };
 
 // Unified Smooth Scroll Function
+    window.onload = function() {
+    // 1. Check if a stealth target was saved in session storage
+    const stealthTarget = sessionStorage.getItem('scrollTarget');
+
+    if (stealthTarget) {
+        // Clear it immediately so it doesn't re-scroll if they refresh
+        sessionStorage.removeItem('scrollTarget');
+        
+        // Wait for particles and AOS to be ready, then scroll
+        setTimeout(() => {
+            scrollToSection(stealthTarget);
+        }, 150); 
+    } else {
+        window.scrollTo(0, 0);
+    }
+
+    AOS.init({ duration: 1100, once: false, mirror: true });
+};
+
+    // Ensure your scrollToSection remains the same as before
     function scrollToSection(sectionId) {
-        if(sectionId === 'hero') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                const headerOffset = 80; // Matches your nav height
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const element = document.getElementById(sectionId);
+        if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
     
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
         }
     }
     </script>
 </body>
 
 </html>
+
 
 
 
