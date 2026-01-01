@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="canonical" href="https://pixelaks.in/games" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -247,11 +248,11 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeMail()">×</span>
             <h2>Send us a Message</h2>
-            <form class="mail-form" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+            <form id="contactForm" class="mail-form">
                 <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="_replyto" placeholder="Your Email" required>
+                <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
-                <button type="submit">Send Email</button>
+                <button type="submit" id="submitBtn">Send Message</button>
             </form>
         </div>
     </div>
@@ -385,6 +386,36 @@
             });
         };
 
+        // 1. PIXELAKS PRO MAILER CONFIG
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerText = "Sending...";
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    btn.innerText = "Message Sent!";
+                    btn.style.background = "#2ecc71"; // Innovation Hub Green
+                    setTimeout(() => {
+                        closeMail();
+                        form.reset();
+                        btn.disabled = false;
+                        btn.innerText = "Send Message";
+                        btn.style.background = ""; 
+                    }, 2500);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    btn.innerText = "Error! Try again.";
+                    btn.disabled = false;
+                });
+        });
+
+        // 2. MODAL CONTROLS
         function openMail() { document.getElementById("contactModal").style.display = "flex"; }
         function closeMail() { document.getElementById("contactModal").style.display = "none"; }
         window.onclick = function(event) {
@@ -418,6 +449,3 @@
 </body>
 
 </html>
-
-
-
