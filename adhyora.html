@@ -192,10 +192,10 @@
     <nav>
         <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
         <ul>
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#divisions">Products</a></li>
-            <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
+        <li><a href="/" onclick="scrollToSection('hero')">Home</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToSection('about')">About</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToSection('divisions')">Products</a></li>
+        <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
         </ul>
     </nav>
 
@@ -494,7 +494,28 @@
             },
             background: { color: "#0a0a0a" }
         });
+
+        function scrollToSection(sectionId) {
+            // Special case for Home: just scroll to top
+            if(sectionId === 'hero') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    // This calculates the header height so it doesn't cover the title
+                    const headerOffset = 80; 
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        }
     </script>
 </body>
 
 </html>
+
