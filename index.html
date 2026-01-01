@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixelaks Technologies | Innovation Hub</title>
+    
+    <meta name="google-site-verification" content="uVemxysz3kjvp6R4VNggMEa-nwIfgsVmU4I4vQ1zsjA" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CRITICAL FIT FIXES (Don't change) --- */
+        * { box-sizing: border-box; } /* Stops elements from pushing past screen width */
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden; /* Stops horizontal scrolling from animations */
+            width: 100%;
+        }
+
+        :root {
+            --primary-blue: #3498db;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(26, 26, 26, 0.9);
+            --glass-bg: rgba(20, 20, 20, 0.7);
+            --text-light: #ffffff;
+        }
+
+        /* AOS Safety Fix */
+        [data-aos] { opacity: 0; transition-property: transform, opacity; }
+        [data-aos].aos-animate { opacity: 1; }
+
+        html { scroll-behavior: smooth; }
+
+        /* --- Glass Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px; /* Standardized height */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav img { height: 50px; width: auto; }
+        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; font-size: 1rem; }
+        nav a:hover { color: var(--primary-blue); }
+
+        /* Mobile Nav Adjustment */
+        @media (max-width: 600px) {
+            nav { height: 60px; padding: 0 3%; }
+            nav img { height: 35px; }
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.85rem; }
+        }
+
+        /* --- Hero --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 5%;
+        }
+
+        /* Particle Background FIXED behind everything */
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; left: 0; }
+        
+        .hero-content { z-index: 2; pointer-events: none; }
+        .hero-content h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin-bottom: 15px; }
+        .hero-content p { font-size: clamp(1rem, 4vw, 1.25rem); max-width: 650px; color: #ccc; font-style: italic; margin: 0 auto; }
+
+        /* --- Section Defaults --- */
+        section { padding: 100px 10%; position: relative; z-index: 2; width: 100%; }
+        .section-title { color: var(--primary-blue); font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 40px; text-align: center; }
+
+        @media (max-width: 600px) {
+            section { padding: 60px 5%; }
+        }
+
+        /* --- Division Layout --- */
+        .division-container { 
+            display: flex; 
+            justify-content: space-between; 
+            gap: 40px; 
+            margin-top: 50px; 
+            width: 100%;
+        }
+        .division-link { flex: 1; text-decoration: none; color: inherit; display: flex; }
+        .division-card {
+            width: 100%; background: var(--card-bg); padding: 45px; border-radius: 25px; text-align: center;
+            transition: 0.4s ease; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .game-side { border-left: 5px solid #9b59b6; }
+        .software-side { border-left: 5px solid #2ecc71; }
+        
+        .division-link:hover .division-card { transform: translateY(-15px); }
+        .division-link:hover .game-side { box-shadow: 0 20px 50px rgba(155, 89, 182, 0.2); border-color: #9b59b6; }
+        .division-link:hover .software-side { box-shadow: 0 20px 50px rgba(46, 204, 113, 0.2); border-color: #2ecc71; }
+
+        .btn-hub { padding: 15px 35px; font-weight: bold; border-radius: 50px; color: black; display: inline-block; align-self: center; margin-top: 20px; }
+        .btn-violet { background: #9b59b6; }
+        .btn-green { background: #2ecc71; }
+
+        /* Responsive Divisions */
+        @media (max-width: 850px) {
+            .division-container { flex-direction: column; gap: 30px; align-items: center; }
+            .division-link { width: 100%; }
+            .division-card { padding: 30px; }
+        }
+
+        /* --- Glass Contact Modal (Exact Copy) --- */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(15px);
+            justify-content: center; align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); padding: 40px;
+            border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid rgba(52, 152, 219, 0.5);
+            position: relative; box-shadow: 0 0 30px rgba(52, 152, 219, 0.2);
+        }
+
+        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .modal-content h2 { color: var(--primary-blue); margin-bottom: 25px; text-align: center; }
+
+        .mail-form input, .mail-form textarea {
+            width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none;
+        }
+
+        .mail-form button {
+            width: 100%; padding: 15px; background: var(--primary-blue); border: none; border-radius: 12px;
+            font-weight: bold; cursor: pointer; transition: 0.3s; color: #fff;
+        }
+        .mail-form button:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary-blue); }
+
+        /* --- Glass Footer (Exact Alignment) --- */
+        footer {
+            background: var(--glass-bg); backdrop-filter: blur(15px); padding: 80px 10% 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); position: relative; z-index: 2;
+        }
+
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 10px; }
+
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--primary-blue); text-shadow: 0 0 15px var(--primary-blue); }
+
+        .social-icons { margin-top: 20px; }
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
+
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="tsparticles"></div>
+
+    <nav>
+        <div class="nav-brand">
+            <img src="logo.png" alt="Pixelaks"> 
+        </div>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
+        </ul>
+    </nav>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeMail()">&times;</span>
+            <h2>Send us a Message</h2>
+            <form class="mail-form" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="_replyto" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
+                <button type="submit">Send Email</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="hero">
+        <div class="hero-content" data-aos="zoom-out">
+            <h1>Pixelaks Technologies</h1>
+            <p>"Engineering the future of digital interaction through immersive gaming experiences and high-performance software solutions."</p>
+        </div>
+    </div>
+
+    <section id="about" data-aos="fade-up">
+        <h2 class="section-title">Who We Are</h2>
+        <p style="text-align: center; max-width: 850px; margin: 0 auto; line-height: 1.8; color: #ddd; font-style: italic;">
+            Pixelaks is a multi-disciplinary technology studio. We bridge the gap between high-performance administrative software and immersive interactive entertainment.
+        </p>
+    </section>
+
+    <section id="divisions" data-aos="fade-up">
+        <h2 class="section-title">Our Divisions</h2>
+        <div class="division-container">
+            <a href="games.html" class="division-link" data-aos="fade-right">
+                <div class="division-card game-side">
+                    <div><h2 style="color: #9b59b6; margin-top:0;">Game Division</h2><p>High-quality casual and educational gaming.</p></div>
+                    <div class="btn-hub btn-violet">Explore Games</div>
+                </div>
+            </a>
+            <a href="adhyora.html" class="division-link" data-aos="fade-left">
+                <div class="division-card software-side">
+                    <div><h2 style="color: #2ecc71; margin-top:0;">Software Division</h2><p>Future-ready campus administration tools.</p></div>
+                    <div class="btn-hub btn-green">View Solutions</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-left">
+                <h3 style="color: #fff; margin-bottom: 10px;">Pixelaks Technologies</h3>
+                <p style="color: #aaa; font-style: italic; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
+                <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pixelaks_technologies" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/pixelaks" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+    
+            <div class="footer-right">
+                <h4>Navigation</h4>
+                <a href="#hero">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#divisions">Products</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+        <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    
+    <script>
+        function openMail() { document.getElementById("contactModal").style.display = "flex"; }
+        function closeMail() { document.getElementById("contactModal").style.display = "none"; }
+        window.onclick = function(event) {
+            let modal = document.getElementById("contactModal");
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+
+        window.onload = function() {
+            window.scrollTo(0, 0);
+            AOS.init({ duration: 1100, once: false, mirror: true });
+        };
+
+        // Your EXACT neural network settings
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 120, density: { enable: true, area: 800 } },
+                color: { value: "#3498db" }, 
+                links: { enable: true, distance: 150, color: "#3498db", opacity: 0.3, width: 1 },
+                move: { enable: true, speed: 1.5, outModes: { default: "out" } },
+                opacity: { value: 0.4 },
+                size: { value: { min: 1, max: 3 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 200, links: { opacity: 0.5 } } }
+            },
+            background: { color: "#0a0a0a" }
+        });
+    </script>
+</body>
+</html>
