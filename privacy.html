@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Pixelaks Technologies</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #3498db;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(26, 26, 26, 0.9);
+            --glass-bg: rgba(20, 20, 20, 0.7);
+            --text-light: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* --- Background Particles --- */
+        #tsparticles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* --- Standardized Header --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%; 
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav img { height: 50px; width: auto; transition: 0.3s; }
+        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; align-items: center; }
+        nav ul li { font-style: normal !important; } 
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-style: normal !important; 
+            font-size: 1rem;
+            transition: 0.3s; 
+            white-space: nowrap;
+        }
+        nav a:hover { color: var(--primary-blue); }
+
+        /* Responsive Header Adjustment */
+        @media (max-width: 600px) {
+            nav { height: 60px; padding: 0 3%; }
+            nav img { height: 35px; }
+            nav ul { gap: 12px; }
+            nav a { font-size: 0.85rem; }
+        }
+
+        /* --- Glass Contact Modal --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            backdrop-filter: blur(15px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(52, 152, 219, 0.5);
+            position: relative;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.2);
+            box-sizing: border-box;
+        }
+
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+
+        .mail-form input, .mail-form textarea {
+            width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; box-sizing: border-box; outline: none;
+        }
+
+        .mail-form button {
+            width: 100%; padding: 15px; background: var(--primary-blue); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white;
+        }
+
+        /* --- Content Layout --- */
+        .legal-container {
+            max-width: 900px;
+            margin: 150px auto 100px;
+            padding: 50px;
+            background: rgba(10, 10, 10, 0.4); 
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            position: relative;
+            z-index: 2;
+            box-sizing: border-box;
+            width: 92%;
+        }
+
+        .legal-container p, .legal-container li { 
+            font-style: italic; 
+            color: rgba(255, 255, 255, 0.85); 
+            margin-bottom: 20px; 
+            font-size: 1.05rem;
+        }
+
+        h1 { color: var(--primary-blue); font-size: 2.5rem; margin-bottom: 30px; border-bottom: 2px solid var(--primary-blue); display: inline-block; }
+        h2 { color: var(--primary-blue); margin-top: 40px; font-size: 1.8rem; }
+        
+        a { color: var(--primary-blue); text-decoration: none; }
+
+        /* Responsive Container Adjustment */
+        @media (max-width: 600px) {
+            .legal-container { margin-top: 100px; padding: 25px; border-radius: 20px; }
+            h1 { font-size: 1.8rem; margin-bottom: 20px; }
+            h2 { font-size: 1.4rem; margin-top: 30px; }
+            .legal-container p, .legal-container li { font-size: 0.95rem; }
+        }
+
+        /* --- Standardized Footer --- */
+        footer {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 80px 10% 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            box-sizing: border-box;
+        }
+
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+        
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; font-style: normal !important; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; font-style: normal !important; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+
+        #footer-email { 
+            color: #fff; 
+            cursor: pointer; 
+            display: inline-block;
+            transition: 0.4s ease;
+            font-weight: 500;
+            font-style: normal !important;
+            word-break: break-all;
+        }
+        #footer-email:hover { 
+            color: var(--primary-blue); 
+            text-shadow: 0 0 15px var(--primary-blue);
+        }
+
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: #3498db; transform: scale(1.2); }
+
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="tsparticles"></div>
+
+    <nav>
+        <div class="nav-brand">
+            <img src="logo.png" alt="Pixelaks"> 
+        </div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
+        </ul>
+    </nav>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeMail()">&times;</span>
+            <h2 style="text-align:center; color:var(--primary-blue);">Send us a Message</h2>
+            <form class="mail-form" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="_replyto" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
+                <button type="submit">Send Email</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="legal-container">
+        <h1>Privacy Policy</h1>
+        <p>Games That was created by Pixelaks Games Maybe a Free Game or Paid Game. In most of the free games, it comes with in-app purchases and advertisements. Pixelaks Games offers this SERVICE free of charge with the understanding that it will be used exactly as is. This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decides to use our Service. If you choose to use our Service, then you agree to our Privacy Policy. The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
+
+        <h2>Information Collection and Use</h2>
+        <p>Pixelaks Games does not collect any of your personal details. The Free games do use third-party services that may collect information used to identify you. Link to the privacy policy of third-party service providers used by the game:</p>
+        <ul>
+            <li>Google Play Services: <a href="https://google.com/policies/privacy/" target="_blank">Privacy Policy</a></li>
+            <li>Unity: <a href="https://unity3d.com/legal/privacy-policy" target="_blank">Privacy Policy</a></li>
+        </ul>
+
+        <h2>Cookies</h2>
+        <p>Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. They are sent to your browser from the websites that you visit and are stored on your device’s internal memory. This Service does not use these "cookies" explicitly. However, the game may use third-party code and libraries that use "cookies" to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.</p>
+
+        <h2>Service Providers</h2>
+        <p>We may employ third-party companies and individuals for the following reasons: To facilitate our Service; To provide the Service on our behalf; To perform Service-related services; To assist us in analyzing how our Service is used. We want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.</p>
+
+        <h2>Links to Other Sites</h2>
+        <p>This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
+
+        <h2>Children’s Privacy</h2>
+        <p>We do not collect any data from children under the age of 13. The games that we created do use third-party services that may collect information used to identify you. Link to the privacy policy of third-party service providers used by the game: Google Play Services Privacy Policy; Unity Privacy Policy.</p>
+
+        <h2>3D Objects</h2>
+        <p>Pixelaks offers 3D Objects that users can download. Some of these objects are available for free, while others require payment. Users can download these objects from provided websites. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites.</p>
+        <p>1. Commercial and Non-Commercial Use: Once downloaded, users have the right to use these 3D objects for both commercial and non-commercial projects.</p>
+        <p>2. Intellectual Property: The ownership and intellectual property rights of the 3D objects remain with Pixelaks or the original creators. Users are prohibited from claiming ownership or distributing the 3D objects themselves.</p>
+        <p>3. Privacy of User Projects: We respect the privacy of user projects utilizing our 3D objects. We do not access, share, or use any data or information related to the specific projects created by users.</p>
+        <p>4. User Responsibility: Users are responsible for ensuring that their use of the downloaded 3D objects complies with applicable laws, regulations, and intellectual property rights of third parties.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at aksgames03@gmail.com.</p>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-left">
+                <h3>Pixelaks Technologies</h3>
+                <p style="font-style: italic; color: #aaa;">Innovative software and gaming experiences.</p>
+                <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pixelaks_technologies" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/pixelaks" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+    
+            <div class="footer-right">
+                <h4>Navigation</h4>
+                <a href="index.html#hero">Home</a>
+                <a href="index.html#about">About Us</a>
+                <a href="index.html#divisions">Products</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+        </div>
+        <p style="text-align:center; color:#555; margin-top:60px; font-style: normal !important;">&copy; 2025 Pixelaks Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        // Force scroll to top on load/refresh
+        window.onbeforeunload = function () { window.scrollTo(0, 0); };
+        window.onload = function() { window.scrollTo(0, 0); };
+
+        // Modal Controls
+        function openMail() { document.getElementById("contactModal").style.display = "flex"; }
+        function closeMail() { document.getElementById("contactModal").style.display = "none"; }
+        window.onclick = function(event) {
+            let modal = document.getElementById("contactModal");
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 120, density: { enable: true, area: 800 } },
+                color: { value: "#3498db" }, 
+                links: { 
+                    enable: true, 
+                    distance: 150, 
+                    color: "#3498db", 
+                    opacity: 0.4, 
+                    width: 1 
+                },
+                move: { 
+                    enable: true, 
+                    speed: 1.8, 
+                    outModes: { default: "out" } 
+                },
+                opacity: { value: 0.5 },
+                size: { value: { min: 1, max: 4 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 250, links: { opacity: 0.7 } } }
+            },
+            background: { color: "#050505" }
+        });
+    </script>
+</body>
+</html>
