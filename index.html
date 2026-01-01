@@ -305,27 +305,48 @@
             background: { color: "#0a0a0a" }
         });
 
-        function scrollToSection(sectionId) {
-            // Special case for Home: just scroll to top
-            if(sectionId === 'hero') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                    // This calculates the header height so it doesn't cover the title
-                    const headerOffset = 80; 
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.onload = function() {
+    // 1. Check if the user arrived with a section request (like /#about)
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1); // Get the ID
         
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
+        // Short delay to ensure AOS animations and particles are ready
+        setTimeout(() => {
+            scrollToSection(targetId);
+            
+            // REMOVE the hashtag from the URL bar to keep the "Rich Look"
+            window.history.replaceState(null, null, window.location.pathname);
+        }, 150); 
+    } else {
+        // If no hash, just start at the top
+        window.scrollTo(0, 0);
+    }
+
+    // Initialize your animations
+    AOS.init({ duration: 1100, once: false, mirror: true });
+};
+
+// Unified Smooth Scroll Function
+    function scrollToSection(sectionId) {
+        if(sectionId === 'hero') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const headerOffset = 80; // Matches your nav height
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         }
+    }
     </script>
 </body>
 
 </html>
+
 
