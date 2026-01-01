@@ -497,15 +497,16 @@
         });
 
         function stealthNav(sectionId) {
-            // Save the target section in temporary session memory
-            sessionStorage.setItem('scrollTarget', sectionId);
-            // Redirect to home page
-            window.location.href = '/';
-        }
+    // 1. Save the target
+    sessionStorage.setItem('scrollTarget', sectionId);
+    // 2. Go to the root domain
+    window.location.assign('/');
+}
     </script>
 </body>
 
 </html>
+
 
 
 
