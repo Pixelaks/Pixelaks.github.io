@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Oldwebsite/
+
+Sitemap: https://pixelaks.in/sitemap.xml
