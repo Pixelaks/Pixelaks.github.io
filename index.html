@@ -349,21 +349,23 @@
 
     // Ensure your scrollToSection remains the same as before
     window.onload = function() {
-    // 1. Check if a stealth target was saved in session storage
+    // 1. Check for the stealth scroll request
     const stealthTarget = sessionStorage.getItem('scrollTarget');
 
     if (stealthTarget) {
-        // Clear it immediately so it doesn't re-scroll if they refresh
+        // Clear it so it doesn't repeat on refresh
         sessionStorage.removeItem('scrollTarget');
         
-        // Wait for particles and AOS to be ready, then scroll
+        // 2. WAIT for the Innovation Hub (AOS and Particles) to render
+        // A 300ms delay is usually the "sweet spot" for mobile and desktop
         setTimeout(() => {
             scrollToSection(stealthTarget);
-        }, 150); 
+        }, 300); 
     } else {
         window.scrollTo(0, 0);
     }
 
+    // Initialize animations
     AOS.init({ duration: 1100, once: false, mirror: true });
 };
 
@@ -385,6 +387,7 @@
 </body>
 
 </html>
+
 
 
 
