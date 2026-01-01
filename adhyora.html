@@ -194,8 +194,8 @@
         <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="stealthNav('about')">About</a></li>
+            <li><a href="javascript:void(0)" onclick="stealthNav('divisions')">Products</a></li>
             <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
         </ul>
     </nav>
@@ -495,10 +495,18 @@
             },
             background: { color: "#0a0a0a" }
         });
+
+        function stealthNav(sectionId) {
+            // Save the target section in temporary session memory
+            sessionStorage.setItem('scrollTarget', sectionId);
+            // Redirect to home page
+            window.location.href = '/';
+        }
     </script>
 </body>
 
 </html>
+
 
 
 
