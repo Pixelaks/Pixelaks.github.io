@@ -206,8 +206,8 @@
         </div>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="stealthNav('about')">About</a></li>
+            <li><a href="javascript:void(0)" onclick="stealthNav('divisions')">Products</a></li>
             <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
         </ul>
     </nav>
@@ -322,8 +322,16 @@
             },
             background: { color: "#050505" }
         });
+
+        function stealthNav(sectionId) {
+    // 1. Save the target
+    sessionStorage.setItem('scrollTarget', sectionId);
+    // 2. Go to the root domain
+    window.location.assign('/');
+}
     </script>
 </body>
 
 </html>
+
 
