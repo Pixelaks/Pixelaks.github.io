@@ -348,6 +348,26 @@
 };
 
     // Ensure your scrollToSection remains the same as before
+    window.onload = function() {
+    // 1. Check if a stealth target was saved in session storage
+    const stealthTarget = sessionStorage.getItem('scrollTarget');
+
+    if (stealthTarget) {
+        // Clear it immediately so it doesn't re-scroll if they refresh
+        sessionStorage.removeItem('scrollTarget');
+        
+        // Wait for particles and AOS to be ready, then scroll
+        setTimeout(() => {
+            scrollToSection(stealthTarget);
+        }, 150); 
+    } else {
+        window.scrollTo(0, 0);
+    }
+
+    AOS.init({ duration: 1100, once: false, mirror: true });
+};
+
+    // Ensure your scrollToSection remains the same as before
     function scrollToSection(sectionId) {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -365,6 +385,7 @@
 </body>
 
 </html>
+
 
 
 
