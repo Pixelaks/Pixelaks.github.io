@@ -489,28 +489,33 @@
 
         // Initialize with Adhyora (Green)
         // --- SMART & STEALTH LOADER ---
+        // --- SMART INITIALIZATION ---
         window.onload = function() {
-            // 1. Check for "Stealth" signal (Internal Link)
+            // 1. FORCE SCROLL TO TOP (The Missing Part)
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
+
+            // 2. CHECK FOR TAB SIGNALS (Stealth or Hash)
             const stealthTab = sessionStorage.getItem('privacyTab');
-            
-            // 2. Check for "Deep Link" (Play Store Link)
             const hashTab = window.location.hash;
 
-            // Logic: If either signal says 'games', open Games tab
+            // Logic: If signal is 'games', open Violet Tab
             if (stealthTab === 'games' || hashTab === '#games') {
                 switchTab('games');
                 
-                // CLEANUP: Remove the signal so it doesn't get stuck
+                // Cleanup signals so they don't get stuck
                 sessionStorage.removeItem('privacyTab'); 
-                
-                // CLEANUP: Remove #games from URL bar without reloading
                 if(hashTab) {
                     history.replaceState(null, null, window.location.pathname);
                 }
             } else {
-                switchTab('adhyora'); // Default to Adhyora
+                // Default: Green Tab
+                switchTab('adhyora');
             }
         };
     </script>
 </body>
 </html>
+
