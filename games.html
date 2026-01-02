@@ -366,7 +366,7 @@
                 <a href="index.html#hero">Home</a>
                 <a href="index.html#about">About Us</a>
                 <a href="index.html#divisions">Products</a>
-                <a href="privacy">Privacy Policy</a>
+                <a href="javascript:void(0)" onclick="openPrivacy('games')">Privacy Policy</a>
                 <a href="terms">Terms & Conditions</a>
             </div>
         </div>
@@ -446,9 +446,15 @@
     // 2. Go to the root domain
     window.location.assign('/');
 }
+
+    function openPrivacy(tab) {
+        sessionStorage.setItem('privacyTab', tab);
+        window.location.assign('privacy.html');
+    }
     </script>
 </body>
 
 </html>
+
 
 
