@@ -375,14 +375,21 @@
                 <a href="privacy">Privacy Policy</a>
                 <a href="terms">Terms & Conditions</a>
             </div>
-            </div>
+        </div>
         <p style="text-align:center; color:#555; margin-top:60px; font-style: normal !important;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     <script>
-        // --- 1. FORCE SCROLL TO TOP (FIXED) ---
-        window.onbeforeunload = function () { window.scrollTo(0, 0); };
+        // --- 1. FORCE SCROLL TO TOP (ROBUST FIX) ---
+        // Prevents the browser from restoring the last scroll position on refresh
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
         
         // --- 2. DYNAMIC COLOR & PARTICLE SYSTEM ---
         function switchTab(type) {
@@ -492,7 +499,7 @@
 
         // --- 5. INITIALIZATION ---
         window.onload = function() {
-            window.scrollTo(0, 0); // Force scroll to top on load
+            window.scrollTo(0, 0); // Immediate Scroll on Load
             
             // Check for Stealth/Hash signals
             const stealthTab = sessionStorage.getItem('privacyTab');
@@ -509,4 +516,3 @@
     </script>
 </body>
 </html>
-
