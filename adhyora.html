@@ -455,13 +455,13 @@
     
             <div class="footer-right">
                 <h4>Navigation</h4>
-                <a href="#hero">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#divisions">Products</a>
+                <a href="/">Home</a>
+                <a href="javascript:void(0)" onclick="stealthNav('about')">About Us</a>
+                <a href="javascript:void(0)" onclick="stealthNav('divisions')">Products</a>
                 <a href="privacy">Privacy Policy</a>
                 <a href="terms">Terms & Conditions</a>
             </div>
-        </div>
+            </div>
         <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
     </footer>
 
@@ -529,13 +529,12 @@
         });
 
         function stealthNav(sectionId) {
-    // 1. Save the target
-    sessionStorage.setItem('scrollTarget', sectionId);
-    // 2. Go to the root domain
-    window.location.assign('/');
-}
+            // 1. Save the target
+            sessionStorage.setItem('scrollTarget', sectionId);
+            // 2. Go to the root domain
+            window.location.assign('/');
+        }
     </script>
 </body>
 
 </html>
-
