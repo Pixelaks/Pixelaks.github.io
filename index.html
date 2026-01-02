@@ -208,7 +208,7 @@
             <img src="logo.png" alt="Pixelaks"> 
         </div>
         <ul>
-            <li><a href="/" onclick="scrollToSection('hero')">Home</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('hero')">Home</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToSection('about')">About</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToSection('divisions')">Products</a></li>
             <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
@@ -274,13 +274,13 @@
     
             <div class="footer-right">
                 <h4>Navigation</h4>
-                <a href="#hero">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#divisions">Products</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('hero')">Home</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('about')">About Us</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('divisions')">Products</a>
                 <a href="privacy">Privacy Policy</a>
                 <a href="terms">Terms & Conditions</a>
             </div>
-        </div>
+            </div>
         <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
     </footer>
 
@@ -326,12 +326,7 @@
             if (event.target == modal) { modal.style.display = "none"; }
         }
 
-        window.onload = function() {
-            window.scrollTo(0, 0);
-            AOS.init({ duration: 1100, once: false, mirror: true });
-        };
-
-        // Your EXACT neural network settings
+        // 3. PARTICLES
         tsParticles.load("tsparticles", {
             particles: {
                 number: { value: 120, density: { enable: true, area: 800 } },
@@ -348,89 +343,48 @@
             background: { color: "#0a0a0a" }
         });
 
+        // 4. CONSOLIDATED ONLOAD LOGIC (Cleaned up the duplicates)
         window.onload = function() {
-    // 1. Check if the user arrived with a section request (like /#about)
-    if (window.location.hash) {
-        const targetId = window.location.hash.substring(1); // Get the ID
-        
-        // Short delay to ensure AOS animations and particles are ready
-        setTimeout(() => {
-            scrollToSection(targetId);
+            // A. Handle SessionStorage (Stealth Nav from other pages)
+            const stealthTarget = sessionStorage.getItem('scrollTarget');
             
-            // REMOVE the hashtag from the URL bar to keep the "Rich Look"
-            window.history.replaceState(null, null, window.location.pathname);
-        }, 150); 
-    } else {
-        // If no hash, just start at the top
-        window.scrollTo(0, 0);
-    }
+            if (stealthTarget) {
+                sessionStorage.removeItem('scrollTarget');
+                setTimeout(() => {
+                    scrollToSection(stealthTarget);
+                }, 300); // Wait for particles/DOM to settle
+            } 
+            // B. Handle Hash (Standard Links /#about) - Optional fallback
+            else if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                setTimeout(() => {
+                    scrollToSection(targetId);
+                    window.history.replaceState(null, null, window.location.pathname);
+                }, 150); 
+            }
+            // C. Default Top
+            else {
+                window.scrollTo(0, 0);
+            }
 
-    // Initialize your animations
-    AOS.init({ duration: 1100, once: false, mirror: true });
-};
+            // D. Init Animations
+            AOS.init({ duration: 1100, once: false, mirror: true });
+        };
 
-// Unified Smooth Scroll Function
-    window.onload = function() {
-    // 1. Check if a stealth target was saved in session storage
-    const stealthTarget = sessionStorage.getItem('scrollTarget');
-
-    if (stealthTarget) {
-        // Clear it immediately so it doesn't re-scroll if they refresh
-        sessionStorage.removeItem('scrollTarget');
-        
-        // Wait for particles and AOS to be ready, then scroll
-        setTimeout(() => {
-            scrollToSection(stealthTarget);
-        }, 150); 
-    } else {
-        window.scrollTo(0, 0);
-    }
-
-    AOS.init({ duration: 1100, once: false, mirror: true });
-};
-
-    // Ensure your scrollToSection remains the same as before
-    window.onload = function() {
-    // 1. Check for the stealth scroll request
-    const stealthTarget = sessionStorage.getItem('scrollTarget');
-
-    if (stealthTarget) {
-        // Clear it so it doesn't repeat on refresh
-        sessionStorage.removeItem('scrollTarget');
-        
-        // 2. WAIT for the Innovation Hub (AOS and Particles) to render
-        // A 300ms delay is usually the "sweet spot" for mobile and desktop
-        setTimeout(() => {
-            scrollToSection(stealthTarget);
-        }, 300); 
-    } else {
-        window.scrollTo(0, 0);
-    }
-
-    // Initialize animations
-    AOS.init({ duration: 1100, once: false, mirror: true });
-};
-
-    // Ensure your scrollToSection remains the same as before
-    function scrollToSection(sectionId) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const headerOffset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        // 5. SMOOTH SCROLL FUNCTION
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const headerOffset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
     
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
         }
-    }
     </script>
 </body>
-
 </html>
-
-
-
-
-
