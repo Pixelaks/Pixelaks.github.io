@@ -359,7 +359,7 @@
         <div class="footer-grid">
             <div class="footer-left">
                 <h3>Pixelaks Technologies</h3>
-                <p style="font-style: italic; color: #aaa;">Innovative software and gaming experiences.</p>
+                <p style="font-style: italic; color: #aaa; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
                 <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/pixelaks_technologies" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -381,7 +381,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     <script>
-        // --- 1. DYNAMIC COLOR & PARTICLE SYSTEM ---
+        // --- 1. FORCE SCROLL TO TOP (IMMEDIATE) ---
+        // This runs instantly before page loads to disable browser scroll restoration
+
+        // --- 2. DYNAMIC COLOR & PARTICLE SYSTEM ---
         function switchTab(type) {
             const root = document.documentElement;
             const tabs = document.querySelectorAll('.tab-btn');
@@ -444,7 +447,7 @@
             });
         }
 
-        // --- 2. MAILER SCRIPT ---
+        // --- 3. MAILER SCRIPT ---
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
         const form = document.getElementById('contactForm');
         const btn = document.getElementById('submitBtn');
@@ -474,7 +477,7 @@
                 });
         });
 
-        // --- 3. UTILITIES ---
+        // --- 4. UTILITIES ---
         function openMail() { document.getElementById("contactModal").style.display = "flex"; }
         function closeMail() { document.getElementById("contactModal").style.display = "none"; }
         window.onclick = function(event) {
@@ -487,35 +490,26 @@
             window.location.assign('/');
         }
 
-        // Initialize with Adhyora (Green)
-        // --- SMART & STEALTH LOADER ---
-        // --- SMART INITIALIZATION ---
+        // --- 5. INITIALIZATION ---
+        // --- 5. INITIALIZATION ---
         window.onload = function() {
-            // 1. FORCE SCROLL TO TOP (The Missing Part)
-            if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }
-            window.scrollTo(0, 0);
-
-            // 2. CHECK FOR TAB SIGNALS (Stealth or Hash)
+            // Smooth Scroll to Top on Load
+            setTimeout(function() { 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }, 300); // Small delay to let the browser render first
+            
+            // Check for Stealth/Hash signals
             const stealthTab = sessionStorage.getItem('privacyTab');
             const hashTab = window.location.hash;
 
-            // Logic: If signal is 'games', open Violet Tab
             if (stealthTab === 'games' || hashTab === '#games') {
                 switchTab('games');
-                
-                // Cleanup signals so they don't get stuck
                 sessionStorage.removeItem('privacyTab'); 
-                if(hashTab) {
-                    history.replaceState(null, null, window.location.pathname);
-                }
+                if(hashTab) history.replaceState(null, null, window.location.pathname);
             } else {
-                // Default: Green Tab
                 switchTab('adhyora');
             }
         };
     </script>
 </body>
 </html>
-
