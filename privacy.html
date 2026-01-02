@@ -372,18 +372,18 @@
                 <a href="/">Home</a>
                 <a href="javascript:void(0)" onclick="stealthNav('about')">About Us</a>
                 <a href="javascript:void(0)" onclick="stealthNav('divisions')">Products</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
             </div>
-        </div>
-        <p style="text-align:center; color:#555; margin-top:60px; font-style: normal !important;">&copy; 2025 Pixelaks Technologies. All Rights Reserved.</p>
+            </div>
+        <p style="text-align:center; color:#555; margin-top:60px; font-style: normal !important;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     <script>
-        // --- 1. FORCE SCROLL TO TOP (IMMEDIATE) ---
-        // This runs instantly before page loads to disable browser scroll restoration
-
+        // --- 1. FORCE SCROLL TO TOP (FIXED) ---
+        window.onbeforeunload = function () { window.scrollTo(0, 0); };
+        
         // --- 2. DYNAMIC COLOR & PARTICLE SYSTEM ---
         function switchTab(type) {
             const root = document.documentElement;
@@ -491,12 +491,8 @@
         }
 
         // --- 5. INITIALIZATION ---
-        // --- 5. INITIALIZATION ---
         window.onload = function() {
-            // Smooth Scroll to Top on Load
-            setTimeout(function() { 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            }, 300); // Small delay to let the browser render first
+            window.scrollTo(0, 0); // Force scroll to top on load
             
             // Check for Stealth/Hash signals
             const stealthTab = sessionStorage.getItem('privacyTab');
