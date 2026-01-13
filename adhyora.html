@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,6 +43,9 @@
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- ADDED: Fonts for the Glitch Effect -->
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <style>
         /* --- GLOBAL FIT FIXES --- */
@@ -130,16 +132,80 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 150px 5% 80px; position: relative; z-index: 2; width: 100%; }
 
-        /* --- Adhyora Styling --- */
-        .section-header { 
-            text-align: center; 
-            color: var(--primary-green); 
-            font-size: clamp(2.8rem, 12vw, 5.5rem); 
-            margin-bottom: 0; 
-            text-transform: uppercase; 
-            letter-spacing: 5px; 
-            filter: drop-shadow(0 0 15px rgba(46, 204, 113, 0.4)); 
+        /* --- GLITCH TEXT STYLES (UPDATED) --- */
+        .glitch-wrapper {
+            position: relative;
+            /* Use Yatra One for the main title to get the Sanskrit look */
+            font-family: 'Yatra One', system-ui; 
+            /* Matching original size roughly, but using clamp */
+            font-size: clamp(2.8rem, 12vw, 5.5rem);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            line-height: 1.1;
+            display: inline-block; /* Helps with centering */
+            color: var(--primary-green); /* Keep green theme */
+            filter: drop-shadow(0 0 15px rgba(46, 204, 113, 0.4));
         }
+        
+        /* The Shirorekha (Top Line) - Connecting the letters */
+        .glitch-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0.16em; /* Adjusted specifically for Yatra One to sit on top of chars */
+            left: -2%;
+            width: 104%;
+            height: 0.06em; /* Scale thickness with font size */
+            background: var(--primary-green);
+            z-index: 3;
+            box-shadow: 0 0 10px var(--primary-green);
+        }
+
+        .main-text {
+            position: relative;
+            z-index: 2;
+            color: var(--primary-green);
+        }
+
+        /* RGB Split Layers */
+        .glitch-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0; 
+        }
+
+        .layer-red {
+            color: #ff0055;
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+
+        .layer-blue {
+            color: #00ccff;
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+        
+        /* --- CRT SCANLINES (SCOPED) --- */
+        .scanlines {
+            position: absolute; /* Changed from fixed to absolute */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Vertical scanlines + Horizontal scanlines pattern */
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+            z-index: 20; /* Scoped z-index to sit on top of text in header */
+            opacity: 0.6;
+        }
+
+        /* --- Original Adhyora Styling (Header removed, tag style kept) --- */
         
         .role-tag { text-align: center; font-size: clamp(1.2rem, 5vw, 1.8rem); color: var(--primary-green); margin: 100px 0 60px; text-transform: uppercase; letter-spacing: 4px; border-bottom: 2px solid var(--primary-green); display: block; }
 
@@ -246,8 +312,19 @@
     <div id="tsparticles"></div>
 
     <div class="container">
-        <header style="text-align: center; margin-bottom: 60px;">
-            <h1 class="section-header" data-aos="zoom-in">ADHYORA</h1>
+        <!-- HEADER: Now contains the scanlines confined here via position:relative -->
+        <header style="position: relative; text-align: center; margin-bottom: 60px;">
+            <!-- Scanlines Scoped to Header -->
+            <div class="scanlines"></div>
+            
+            <div data-aos="zoom-in">
+                <div class="glitch-wrapper">
+                    <div class="main-text" id="text-main"></div>
+                    <div class="glitch-layer layer-red" id="text-red"></div>
+                    <div class="glitch-layer layer-blue" id="text-blue"></div>
+                </div>
+            </div>
+            
             <h2 style="color: #fff; font-weight: 300; letter-spacing: 6px; margin-top: 5px; opacity: 0.9; text-transform: uppercase; font-size: clamp(0.9rem, 4vw, 1.2rem);">Academic Management System</h2>
         </header>
 
@@ -501,6 +578,11 @@
         window.onload = function() {
             window.scrollTo(0, 0);
             AOS.init({ duration: 1100, once: false, mirror: true });
+            
+            // --- START GLITCH TEXT ANIMATION ---
+            setTimeout(() => {
+                updateText();
+            }, 1000); // 1s delay before start
         };
 
         // 1. PIXELAKS PRO MAILER CONFIG
@@ -557,18 +639,99 @@
         });
 
         function stealthNav(sectionId) {
-    // 1. Save the target
-    sessionStorage.setItem('scrollTarget', sectionId);
-    // 2. Go to the root domain
-    window.location.assign('/');
-}
+            // 1. Save the target
+            sessionStorage.setItem('scrollTarget', sectionId);
+            // 2. Go to the root domain
+            window.location.assign('/');
+        }
+
+        /* --- GLITCH LOGIC (ADDED) --- */
+        const TARGET_TEXT = "ADHYORA";
+        const DECODE_SPEED = 6; 
+        const CHAOS_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; 
+        
+        const elMain = document.getElementById('text-main');
+        const elRed = document.getElementById('text-red');
+        const elBlue = document.getElementById('text-blue');
+
+        let frame = 0;
+        let lockIndex = 0;
+        let isComplete = false;
+        
+        function updateText() {
+            if (isComplete) return;
+
+            let output = "";
+            
+            // Construct the string
+            for (let i = 0; i < TARGET_TEXT.length; i++) {
+                if (i < lockIndex) {
+                    // Locked letter
+                    output += TARGET_TEXT[i];
+                } else {
+                    // Random chaos letter
+                    output += CHAOS_CHARS[Math.floor(Math.random() * CHAOS_CHARS.length)];
+                }
+            }
+
+            // Apply text
+            elMain.innerText = output;
+            elRed.innerText = output;
+            elBlue.innerText = output;
+
+            // Glitch Effect (RGB Shift)
+            if (Math.random() > 0.8) {
+                // Stronger shift for the larger font
+                elRed.style.transform = `translate(${Math.random()*6 - 3}px, ${Math.random()*6 - 3}px)`;
+                elBlue.style.transform = `translate(${Math.random()*6 - 3}px, ${Math.random()*6 - 3}px)`;
+                elRed.style.opacity = 0.8;
+                elBlue.style.opacity = 0.8;
+            } else {
+                elRed.style.transform = "translate(0,0)";
+                elBlue.style.transform = "translate(0,0)";
+                elRed.style.opacity = 0;
+                elBlue.style.opacity = 0;
+            }
+
+            // Progress Logic
+            if (frame % DECODE_SPEED === 0) {
+                lockIndex++;
+                if (lockIndex > TARGET_TEXT.length) {
+                    isComplete = true;
+                    finishSequence();
+                }
+            }
+            
+            frame++;
+            requestAnimationFrame(updateText);
+        }
+
+        function finishSequence() {
+            // Ensure clean final state
+            elMain.innerText = TARGET_TEXT;
+            elRed.innerText = TARGET_TEXT;
+            elBlue.innerText = TARGET_TEXT;
+            elRed.style.opacity = 0;
+            elBlue.style.opacity = 0;
+
+            // Trigger post-intro subtle glitch loop
+            setInterval(subtleGlitch, 2000);
+        }
+
+        function subtleGlitch() {
+            // Occasional twitch after intro is done
+            if(Math.random() > 0.3) return;
+            
+            elRed.style.opacity = 1;
+            elBlue.style.opacity = 1;
+            elRed.style.transform = `translate(-3px, 0)`;
+            elBlue.style.transform = `translate(3px, 0)`;
+            
+            setTimeout(() => {
+                elRed.style.opacity = 0;
+                elBlue.style.opacity = 0;
+            }, 100);
+        }
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
