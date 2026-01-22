@@ -1,63 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Action Handler</title>
-    <style>
-        body { background-color: #0a0a0a; color: #00e600; font-family: monospace; padding: 20px; font-size: 16px; }
-        button { padding: 15px 30px; background: #00e600; color: black; border: none; font-weight: bold; cursor: pointer; font-size: 18px; margin-top: 20px; }
-    </style>
-</head>
-<body>
-
-    <h2>⚠️ DEBUG MODE: TRAFFIC COP</h2>
-    <div id="debug-log">Loading parameters...</div>
-    
-    <br><hr><br>
-    
-    <div id="manual-link">Processing...</div>
-
+    <title>Redirecting...</title>
     <script>
         window.onload = function() {
-            const log = document.getElementById('debug-log');
-            const manualDiv = document.getElementById('manual-link');
-
-            // 1. Get Params
+            // 1. Get Params from Firebase Link
             const params = new URLSearchParams(window.location.search);
             const mode = params.get('mode');
             const oobCode = params.get('oobCode');
-            
-            // 2. Print what we found
-            let debugInfo = `
-                <p><strong>URL:</strong> ${window.location.href}</p>
-                <p><strong>Mode Detected:</strong> ${mode ? mode : "NULL (Error)"}</p>
-                <p><strong>Code Detected:</strong> ${oobCode ? "YES" : "NO (Error)"}</p>
-            `;
-            log.innerHTML = debugInfo;
+            const apiKey = params.get('apiKey');
 
-            // 3. Determine Destination
-            let targetUrl = "";
+            // 2. Base URL (e.g., https://pixelaks.in)
+            const baseUrl = window.location.origin;
 
+            // 3. Traffic Cop Logic (Targeting ROOT FILES now)
             if (mode === 'resetPassword') {
-                // Folder Method
-                targetUrl = `/reset-password/?oobCode=${oobCode}`;
+                // Point to reset-password.html
+                window.location.href = `${baseUrl}/reset-password.html?oobCode=${oobCode}`;
             } 
             else if (mode === 'verifyEmail') {
-                // Root File Method
-                targetUrl = `/verify-email.html?oobCode=${oobCode}`;
+                // Point to verify-email.html
+                window.location.href = `${baseUrl}/verify-email.html?oobCode=${oobCode}`;
             } 
             else {
-                log.innerHTML += `<p style="color:red">ERROR: Unknown Mode! Firebase sent us here without a mode.</p>`;
-                return;
+                // If unknown mode, go Home
+                window.location.href = `${baseUrl}/`;
             }
-
-            // 4. Show Manual Button (Instead of auto-redirecting)
-            manualDiv.innerHTML = `
-                <p>Target Destination: <strong>${targetUrl}</strong></p>
-                <button onclick="window.location.href='${targetUrl}'">CLICK TO GO THERE MANUALLY</button>
-            `;
         };
     </script>
+</head>
+<body>
+    <p>Redirecting to secure page...</p>
 </body>
 </html>
