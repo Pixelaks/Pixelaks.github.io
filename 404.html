@@ -1,107 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Signal Lost | Pixelaks Technologies</title>
+    
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | Pixelaks Technologies</title>
-    
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        * { box-sizing: border-box; }
-        body, html {
-            margin: 0; padding: 0;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
+        /* --- CORE THEME STYLES (BLUE) --- */
+        :root {
+            --primary-blue: #3498db; /* Changed to Blue */
+            --dark-bg: #0a0a0a;
+            --text-light: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             height: 100vh;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
-        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; }
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; left: 0; }
+
+        /* CRT Scanlines (Subtle Blue Tint) */
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(52, 152, 219, 0.05), rgba(52, 152, 219, 0.02));
+            background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 20; opacity: 0.5; 
+        }
 
         .error-container {
-            z-index: 2;
-            text-align: center;
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 60px;
-            border-radius: 30px;
+            position: relative; z-index: 100; text-align: center;
+            background: rgba(30, 30, 30, 0.85); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 60px 40px; border-radius: 30px; 
+            /* Blue Border */
             border: 1px solid rgba(52, 152, 219, 0.3);
-            box-shadow: 0 0 50px rgba(52, 152, 219, 0.1);
-            max-width: 90%;
+            box-shadow: 0 0 50px rgba(0,0,0, 0.8);
+            max-width: 90%; width: 500px;
+            /* Blue Top Bar */
+            border-top: 4px solid var(--primary-blue);
         }
 
-        h1 {
-            font-size: clamp(5rem, 15vw, 8rem);
-            margin: 0;
-            background: linear-gradient(45deg, #3498db, #2ecc71);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 900;
+        /* Glitch Header "404" (Blue) */
+        .glitch-wrapper {
+            position: relative; font-family: 'Yatra One', system-ui; 
+            font-size: clamp(6rem, 15vw, 8rem); white-space: nowrap; 
+            color: var(--primary-blue); line-height: 1; margin-bottom: 10px;
+            display: inline-block; 
+            /* Blue Glow */
+            text-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+        }
+        
+        .main-text { position: relative; z-index: 2; }
+        .glitch-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; mix-blend-mode: screen; }
+        /* Kept red/blue shift layers for contrast, looks good against blue base */
+        .layer-red { color: #ff0055; z-index: 1; }
+        .layer-cyan { color: #00ffff; z-index: 1; } 
+
+        /* Subtext */
+        h2 {
+            font-size: 1.2rem; margin-bottom: 20px; color: #fff; text-transform: uppercase; letter-spacing: 3px;
         }
 
         p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 30px;
-            font-style: italic;
+            font-size: 1rem; color: #bbb; margin-bottom: 40px; font-style: italic; line-height: 1.6;
         }
 
+        /* Button (Blue) */
         .btn-home {
-            display: inline-block;
-            padding: 15px 40px;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: 0.4s;
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            display: inline-block; padding: 15px 40px;
+            background: var(--primary-blue); color: #ffffff; /* White text on blue button */
+            text-decoration: none; border-radius: 8px;
+            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s; 
+            /* Blue shadow */
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
         }
 
         .btn-home:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.5);
-            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.6);
+            background: #2980b9; /* Slightly darker blue on hover */
         }
+
     </style>
 </head>
 <body>
 
     <div id="tsparticles"></div>
+    <div class="scanlines"></div>
 
-    <div class="error-container" data-aos="zoom-in">
-        <h1>404</h1>
-        <p>This coordinate does not exist in our digital hub.</p>
-        <a href="/" class="btn-home">Back to Innovation Hub</a>
+    <div class="error-container">
+        
+        <div class="glitch-wrapper">
+            <div class="main-text">404</div>
+            <div class="glitch-layer layer-red">404</div>
+            <div class="glitch-layer layer-cyan">404</div>
+        </div>
+
+        <h2>Page Not Found</h2>
+        <p>This coordinate does not exist in our digital hub.<br>The signal has been lost.</p>
+
+        <a href="/" class="btn-home">
+            <i class="fas fa-home" style="margin-right: 8px;"></i> Return Base
+        </a>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    <script>
-        AOS.init({ duration: 1200 });
 
+    <script>
+        // --- 1. PARTICLES (Blue) ---
         tsParticles.load("tsparticles", {
             particles: {
-                number: { value: 80, density: { enable: true, area: 800 } },
-                color: { value: "#3498db" },
-                links: { enable: true, distance: 150, color: "#3498db", opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 1 },
-                opacity: { value: 0.3 },
+                number: { value: 60, density: { enable: true, area: 800 } },
+                color: { value: "#3498db" }, /* Blue Particles */
+                links: { enable: true, distance: 150, color: "#3498db", opacity: 0.2, width: 1 }, /* Blue Links */
+                move: { enable: true, speed: 1, outModes: { default: "out" } },
+                opacity: { value: 0.4 },
                 size: { value: { min: 1, max: 3 } }
             },
             background: { color: "#0a0a0a" }
         });
+
+        // --- 2. GLITCH EFFECT ---
+        const TARGET_TEXT = "404";
+        // Changed to generic tech characters for a cooler look
+        const CHAOS_CHARS = "404ERROR_//SYSTEM_FAILURE"; 
+        
+        class GlitchEffect {
+            constructor() {
+                this.elMain = document.querySelector('.main-text');
+                this.elRed = document.querySelector('.layer-red');
+                this.elBlue = document.querySelector('.layer-cyan');
+                this.frame = 0;
+                this.animate();
+            }
+
+            animate() {
+                const animFrame = () => {
+                    // Constant subtle twitch
+                    if (Math.random() > 0.92) {
+                        this.elRed.style.transform = `translate(${Math.random()*10-5}px, ${Math.random()*6-3}px)`;
+                        this.elBlue.style.transform = `translate(${Math.random()*10-5}px, ${Math.random()*6-3}px)`;
+                        this.elRed.style.opacity = 0.8;
+                        this.elBlue.style.opacity = 0.8;
+                        
+                        // Occasionally swap text
+                        if(Math.random() > 0.6) {
+                           // Pick a random chunk from chaos chars
+                           const start = Math.floor(Math.random() * (CHAOS_CHARS.length - 3));
+                           this.elMain.innerText = CHAOS_CHARS.substring(start, start + 3);
+                        } else {
+                           this.elMain.innerText = TARGET_TEXT;
+                        }
+
+                    } else {
+                        this.elRed.style.opacity = 0;
+                        this.elBlue.style.opacity = 0;
+                        this.elMain.innerText = TARGET_TEXT;
+                    }
+
+                    this.frame++;
+                    requestAnimationFrame(animFrame);
+                };
+                requestAnimationFrame(animFrame);
+            }
+        }
+
+        window.onload = () => { new GlitchEffect(); };
     </script>
 </body>
 </html>
