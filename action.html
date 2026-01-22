@@ -1,36 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting | Adhyora</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CORE THEME STYLES --- */
+        :root {
+            --primary-green: #2ecc71; 
+            --dark-bg: #0a0a0a;
+            --text-light: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; left: 0; }
+
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%; pointer-events: none; z-index: 20; opacity: 0.4; 
+        }
+
+        .loader-container {
+            position: relative; z-index: 100; text-align: center;
+        }
+
+        /* Glitch Text */
+        .glitch-wrapper {
+            position: relative; font-family: 'Yatra One', system-ui; 
+            font-size: clamp(2rem, 6vw, 3rem); white-space: nowrap; 
+            color: var(--primary-green); margin-bottom: 20px; display: inline-block; text-transform: uppercase;
+        }
+        
+        .glitch-wrapper::before {
+            content: ''; position: absolute; top: 0.12em; left: -2%; width: 104%; height: 0.08em;
+            background: var(--primary-green); box-shadow: 0 0 10px var(--primary-green); z-index: 3;
+        }
+        
+        .main-text { position: relative; z-index: 2; }
+        .glitch-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; mix-blend-mode: screen; }
+        .layer-red { color: #ff0055; z-index: 1; }
+        .layer-blue { color: #00ccff; z-index: 1; }
+
+        /* Tech Loader Ring */
+        .tech-loader {
+            width: 60px; height: 60px;
+            border: 3px solid rgba(46, 204, 113, 0.2);
+            border-top: 3px solid var(--primary-green);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
+        }
+
+        .status-text {
+            color: #888; font-family: 'Courier New', monospace; font-size: 0.9rem; letter-spacing: 2px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div id="tsparticles"></div>
+    <div class="scanlines"></div>
+
+    <div class="loader-container">
+        <div class="tech-loader"></div>
+        
+        <div class="glitch-wrapper">
+            <div class="main-text">INITIALIZING...</div>
+            <div class="glitch-layer layer-red">INITIALIZING...</div>
+            <div class="glitch-layer layer-blue">INITIALIZING...</div>
+        </div>
+
+        <p class="status-text" id="statusLog">ESTABLISHING SECURE CONNECTION</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
     <script>
+        // --- 1. THE TRAFFIC COP LOGIC ---
         window.onload = function() {
-            // 1. Get Params from Firebase Link
+            // Start visuals
+            loadParticles();
+            new GlitchEffect("INITIALIZING...");
+
+            // Simulate a tiny delay so the user sees the cool animation (optional, creates "tech" feel)
+            setTimeout(processRedirect, 800); 
+        };
+
+        function processRedirect() {
             const params = new URLSearchParams(window.location.search);
             const mode = params.get('mode');
             const oobCode = params.get('oobCode');
-            const apiKey = params.get('apiKey');
-
-            // 2. Base URL (e.g., https://pixelaks.in)
             const baseUrl = window.location.origin;
+            const statusText = document.getElementById('statusLog');
 
-            // 3. Traffic Cop Logic (Targeting ROOT FILES now)
             if (mode === 'resetPassword') {
-                // Point to reset-password.html
+                statusText.innerText = "TARGET: PASSWORD_RESET_PROTOCOL";
                 window.location.href = `${baseUrl}/reset-password.html?oobCode=${oobCode}`;
             } 
             else if (mode === 'verifyEmail') {
-                // Point to verify-email.html
+                statusText.innerText = "TARGET: IDENTITY_VERIFICATION";
                 window.location.href = `${baseUrl}/verify-email.html?oobCode=${oobCode}`;
             } 
             else {
-                // If unknown mode, go Home
-                window.location.href = `${baseUrl}/`;
+                statusText.innerText = "ERROR: UNKNOWN PROTOCOL - ABORTING";
+                setTimeout(() => { window.location.href = `${baseUrl}/`; }, 1000);
             }
-        };
+        }
+
+        // --- 2. VISUAL EFFECTS ---
+        function loadParticles() {
+            tsParticles.load("tsparticles", {
+                particles: {
+                    number: { value: 40, density: { enable: true, area: 800 } },
+                    color: { value: "#2ecc71" },
+                    links: { enable: true, distance: 150, color: "#2ecc71", opacity: 0.2, width: 1 },
+                    move: { enable: true, speed: 2, outModes: { default: "out" } },
+                    opacity: { value: 0.3 },
+                    size: { value: { min: 1, max: 2 } }
+                },
+                background: { color: "#0a0a0a" }
+            });
+        }
+
+        const CHAOS_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; 
+        
+        class GlitchEffect {
+            constructor(text) {
+                this.targetText = text;
+                this.elMain = document.querySelector('.main-text');
+                this.elRed = document.querySelector('.layer-red');
+                this.elBlue = document.querySelector('.layer-blue');
+                this.frame = 0;
+                this.lockIndex = 0;
+                this.animate();
+            }
+
+            animate() {
+                const animFrame = () => {
+                    if (this.lockIndex > this.targetText.length) {
+                        this.cleanup();
+                        return; 
+                    }
+
+                    let output = "";
+                    for (let i = 0; i < this.targetText.length; i++) {
+                        if (i < this.lockIndex) { output += this.targetText[i]; } 
+                        else { output += CHAOS_CHARS[Math.floor(Math.random() * CHAOS_CHARS.length)]; }
+                    }
+
+                    this.elMain.innerText = output;
+                    this.elRed.innerText = output;
+                    this.elBlue.innerText = output;
+
+                    if (Math.random() > 0.8) {
+                        this.elRed.style.transform = `translate(${Math.random()*4-2}px, ${Math.random()*4-2}px)`;
+                        this.elBlue.style.transform = `translate(${Math.random()*4-2}px, ${Math.random()*4-2}px)`;
+                        this.elRed.style.opacity = 0.8;
+                        this.elBlue.style.opacity = 0.8;
+                    } else {
+                        this.elRed.style.opacity = 0;
+                        this.elBlue.style.opacity = 0;
+                    }
+
+                    if (this.frame % 3 === 0) this.lockIndex++;
+                    this.frame++;
+                    requestAnimationFrame(animFrame);
+                };
+                requestAnimationFrame(animFrame);
+            }
+
+            cleanup() {
+                this.elRed.style.opacity = "0";
+                this.elBlue.style.opacity = "0";
+                this.elRed.style.transform = "none";
+                this.elBlue.style.transform = "none";
+            }
+        }
     </script>
-</head>
-<body>
-    <p>Redirecting to secure page...</p>
 </body>
 </html>
