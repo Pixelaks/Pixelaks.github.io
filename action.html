@@ -5,26 +5,21 @@
     <title>Redirecting...</title>
     <script>
         window.onload = function() {
-            // 1. Get the Secret Codes from the URL
             const params = new URLSearchParams(window.location.search);
             const mode = params.get('mode');
             const oobCode = params.get('oobCode');
-            const apiKey = params.get('apiKey'); // Sometimes needed
-
-            // 2. Base URL (Your Website)
             const baseUrl = window.location.origin;
 
-            // 3. The Traffic Cop Logic
             if (mode === 'resetPassword') {
-                // Send to the Hacker Password Page
+                // 1. Send to the Password Reset FOLDER
                 window.location.href = `${baseUrl}/reset-password/?oobCode=${oobCode}`;
             } 
             else if (mode === 'verifyEmail') {
-                // Send to the Hacker Verification Page
-                window.location.href = `${baseUrl}/verify-email/?oobCode=${oobCode}`;
+                // 2. Send to the Verify Email FILE (Root)
+                window.location.href = `${baseUrl}/verify-email.html?oobCode=${oobCode}`;
             } 
             else {
-                // If something is weird, go Home
+                // Fallback to home
                 window.location.href = `${baseUrl}/`;
             }
         };
