@@ -528,25 +528,42 @@
             window.location.assign('/');
         }
 
-        // --- 5. INITIALIZATION ---
+        // --- 5. ULTIMATE INITIALIZATION ---
         window.onload = function() {
-            window.scrollTo(0, 0); // Immediate Scroll on Load
-            
-            // Check for Stealth/Hash signals
+            // 1. Smooth Scroll to Top
+            setTimeout(function() { 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }, 300);
+
+            // 2. GET ALL SIGNALS (Stealth, Hash, AND Query)
             const stealthTab = sessionStorage.getItem('privacyTab');
             const hashTab = window.location.hash;
+            
+            // --- THIS IS THE MISSING PART FOR PLAY STORE ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryTab = urlParams.get('tab'); // Reads ?tab=games
 
-            if (stealthTab === 'games' || hashTab === '#games') {
+            // 3. LOGIC: Open Games Tab if ANY signal is present
+            if (stealthTab === 'games' || hashTab === '#games' || queryTab === 'games') {
                 switchTab('games');
+                
+                // Cleanup
                 sessionStorage.removeItem('privacyTab'); 
-                if(hashTab) history.replaceState(null, null, window.location.pathname);
+                
+                // Remove #games and ?tab=games from URL so it looks clean
+                if (hashTab || queryTab) {
+                    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                    window.history.replaceState({path:cleanUrl}, '', cleanUrl);
+                }
             } else {
+                // Default to Adhyora (Green)
                 switchTab('adhyora');
             }
         };
     </script>
 </body>
 </html>
+
 
 
 
