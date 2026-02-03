@@ -53,6 +53,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
+        /* --- CRITICAL FIT FIXES (Don't change) --- */
         * { box-sizing: border-box; } 
         
         html, body {
@@ -67,19 +68,19 @@
 
         :root {
             --primary-blue: #3498db;
-            --primary-green: #2ecc71;
-            --primary-violet: #9b59b6;
             --dark-bg: #0a0a0a;
             --card-bg: rgba(26, 26, 26, 0.9);
             --glass-bg: rgba(20, 20, 20, 0.7);
             --text-light: #ffffff;
         }
 
+        /* AOS Safety Fix */
         [data-aos] { opacity: 0; transition-property: transform, opacity; }
         [data-aos].aos-animate { opacity: 1; }
 
         html { scroll-behavior: smooth; }
 
+        /* --- Glass Navigation --- */
         nav {
             position: fixed;
             top: 0;
@@ -108,6 +109,7 @@
             nav a { font-size: 0.85rem; }
         }
 
+        /* --- Hero --- */
         #hero {
             height: 100vh;
             display: flex;
@@ -122,29 +124,37 @@
         #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; top: 0; left: 0; }
         
         .hero-content { z-index: 2; pointer-events: none; }
-        .hero-content h1 { font-size: clamp(2.2rem, 8vw, 4rem); margin-bottom: 15px; letter-spacing: -1px; }
-        .hero-content p { font-size: clamp(1rem, 4vw, 1.2rem); max-width: 700px; color: #aaa; line-height: 1.6; margin: 0 auto; }
+        .hero-content h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin-bottom: 15px; }
+        .hero-content p { font-size: clamp(1rem, 4vw, 1.25rem); max-width: 650px; color: #ccc; font-style: italic; margin: 0 auto; }
 
+        /* --- Section Defaults --- */
         section { padding: 100px 10%; position: relative; z-index: 2; width: 100%; }
         .section-title { color: var(--primary-blue); font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 40px; text-align: center; }
 
+        @media (max-width: 600px) {
+            section { padding: 60px 5%; }
+        }
+
+        /* --- Values Grid --- */
         .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
         .value-card { 
-            background: rgba(255, 255, 255, 0.02); padding: 40px; border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: 0.4s ease;
+            background: rgba(255, 255, 255, 0.03); padding: 35px; border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: 0.3s;
         }
-        .value-card:hover { transform: translateY(-10px); border-color: var(--primary-blue); box-shadow: 0 20px 40px rgba(52, 152, 219, 0.1); }
-        .value-card i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 25px; }
-        .value-card h3 { color: #fff; margin-bottom: 15px; font-size: 1.4rem; }
-        .value-card p { color: #888; line-height: 1.7; font-size: 0.95rem; }
+        .value-card:hover { transform: translateY(-5px); border-color: var(--primary-blue); box-shadow: 0 10px 30px rgba(52, 152, 219, 0.15); }
+        .value-card i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .value-card h3 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; }
+        .value-card p { color: #aaa; line-height: 1.6; font-size: 0.95rem; }
 
+        /* --- UPDATED TECH STRIP --- */
         .tech-strip { 
             position: relative; 
             z-index: 2;
-            background: rgba(10, 10, 10, 0.9); 
-            border-top: 1px solid rgba(255, 255, 255, 0.03); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
-            padding: 60px 0 30px 0; 
+            background: rgba(10, 10, 10, 0.8); 
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 50px 0 20px 0; 
+            margin: 50px 0;
             display: flex; 
             flex-direction: column;
             align-items: center;
@@ -153,18 +163,38 @@
         .icons-container {
             display: flex; 
             justify-content: center; 
-            gap: clamp(30px, 5vw, 70px); 
+            gap: 60px; 
             flex-wrap: wrap; 
             align-items: center;
             width: 100%;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
-        .tech-item { text-align: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .tech-item:hover { transform: scale(1.2) translateY(-5px); }
-        .tech-item i { font-size: 2.8rem; margin-bottom: 12px; }
-        .tech-item span { display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; color: #fff; }
+        .tech-item { 
+            text-align: center; 
+            color: #ffffff; 
+            transition: 0.4s ease; 
+        }
 
+        .tech-item:hover { 
+            transform: scale(1.15); 
+        }
+
+        .tech-item i { 
+            font-size: 2.5rem; 
+            margin-bottom: 10px; 
+        }
+
+        .tech-item span { 
+            display: block; 
+            font-size: 0.75rem; 
+            font-weight: bold; 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Tech Brand Colors */
         .fa-unity { color: #ffffff; }
         .fa-code { color: #007ACC; }
         .fa-android { color: #3DDC84; }
@@ -174,15 +204,15 @@
 
         .attr-text {
             font-size: 0.65rem;
-            color: #444;
+            color: #555;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
             width: 80%;
             line-height: 1.6;
-            letter-spacing: 0.5px;
         }
 
+        /* --- Division Layout --- */
         .division-container { 
             display: flex; 
             justify-content: space-between; 
@@ -192,80 +222,90 @@
         }
         .division-link { flex: 1; text-decoration: none; color: inherit; display: flex; }
         .division-card {
-            width: 100%; background: var(--card-bg); padding: 50px; border-radius: 30px; text-align: center;
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.03); display: flex; flex-direction: column; justify-content: space-between;
+            width: 100%; background: var(--card-bg); padding: 45px; border-radius: 25px; text-align: center;
+            transition: 0.4s ease; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: space-between;
         }
-        .game-side { border-top: 4px solid var(--primary-violet); }
-        .software-side { border-top: 4px solid var(--primary-green); }
+        .game-side { border-left: 5px solid #9b59b6; }
+        .software-side { border-left: 5px solid #2ecc71; }
         
-        .division-link:hover .division-card { transform: translateY(-20px); background: rgba(35, 35, 35, 0.95); }
-        .division-link:hover .game-side { box-shadow: 0 30px 60px rgba(155, 89, 182, 0.15); }
-        .division-link:hover .software-side { box-shadow: 0 30px 60px rgba(46, 204, 113, 0.15); }
+        .division-link:hover .division-card { transform: translateY(-15px); }
+        .division-link:hover .game-side { box-shadow: 0 20px 50px rgba(155, 89, 182, 0.2); border-color: #9b59b6; }
+        .division-link:hover .software-side { box-shadow: 0 20px 50px rgba(46, 204, 113, 0.2); border-color: #2ecc71; }
 
-        .btn-hub { padding: 18px 40px; font-weight: 800; border-radius: 50px; color: black; display: inline-block; align-self: center; margin-top: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-violet { background: var(--primary-violet); }
-        .btn-green { background: var(--primary-green); }
+        .btn-hub { padding: 15px 35px; font-weight: bold; border-radius: 50px; color: black; display: inline-block; align-self: center; margin-top: 20px; }
+        .btn-violet { background: #9b59b6; }
+        .btn-green { background: #2ecc71; }
 
+        /* --- Why Choose Us --- */
         .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
         .why-card { 
             display: flex; align-items: flex-start; gap: 20px; 
-            background: rgba(255,255,255,0.01); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.02); padding: 25px; border-radius: 15px; 
         }
-        .why-card i { color: var(--primary-blue); font-size: 1.6rem; margin-top: 5px; }
-        .why-content h4 { margin: 0 0 8px 0; color: #fff; font-size: 1.2rem; }
-        .why-content p { margin: 0; color: #777; font-size: 0.95rem; line-height: 1.6; }
+        .why-card i { color: var(--primary-blue); font-size: 1.5rem; margin-top: 5px; }
+        .why-content h4 { margin: 0 0 5px 0; color: #fff; font-size: 1.1rem; }
+        .why-content p { margin: 0; color: #aaa; font-size: 0.9rem; line-height: 1.5; }
 
         @media (max-width: 850px) {
-            .division-container { flex-direction: column; gap: 30px; }
+            .division-container { flex-direction: column; gap: 30px; align-items: center; }
             .division-link { width: 100%; }
-            .tech-strip { padding: 50px 5%; }
+            .division-card { padding: 30px; }
+            .tech-strip { padding: 40px 10%; }
+            .icons-container { gap: 30px; }
         }
 
+        /* --- Glass Contact Modal --- */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9); z-index: 2000; backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(15px);
             justify-content: center; align-items: center;
         }
 
         .modal-content {
-            background: rgba(20, 20, 20, 0.9); padding: 45px;
-            border-radius: 30px; width: 90%; max-width: 500px; border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
+            background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); padding: 40px;
+            border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid rgba(52, 152, 219, 0.5);
+            position: relative; box-shadow: 0 0 30px rgba(52, 152, 219, 0.2);
         }
 
-        .close-modal { position: absolute; top: 25px; right: 30px; font-size: 2rem; cursor: pointer; color: #666; transition: 0.3s; }
-        .close-modal:hover { color: #fff; }
+        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .modal-content h2 { color: var(--primary-blue); margin-bottom: 25px; text-align: center; }
 
         .mail-form input, .mail-form textarea {
-            width: 100%; padding: 18px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; color: white; outline: none; font-size: 1rem;
+            width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none;
         }
 
         .mail-form button {
-            width: 100%; padding: 18px; background: var(--primary-blue); border: none; border-radius: 15px;
-            font-weight: bold; cursor: pointer; transition: 0.4s; color: #fff; font-size: 1.1rem;
+            width: 100%; padding: 15px; background: var(--primary-blue); border: none; border-radius: 12px;
+            font-weight: bold; cursor: pointer; transition: 0.3s; color: #fff;
         }
-        .mail-form button:hover { background: #2980b9; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3); }
+        .mail-form button:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary-blue); }
 
+        /* --- Glass Footer --- */
         footer {
-            background: var(--glass-bg); backdrop-filter: blur(15px); padding: 100px 10% 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05); position: relative; z-index: 2;
+            background: var(--glass-bg); backdrop-filter: blur(15px); padding: 80px 10% 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); position: relative; z-index: 2;
         }
 
-        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 60px; }
-        .footer-left { flex: 1; min-width: 320px; }
-        .footer-right { display: flex; flex-direction: column; gap: 12px; }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 10px; }
 
-        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.3s; font-weight: 600; font-size: 1.1rem; }
-        #footer-email:hover { color: var(--primary-blue); }
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--primary-blue); text-shadow: 0 0 15px var(--primary-blue); }
 
-        .social-icons { margin-top: 25px; }
-        .social-icons a { color: #555; font-size: 2rem; margin-right: 30px; transition: 0.4s; }
-        .social-icons a:hover { color: #fff; transform: translateY(-5px); }
+        .social-icons { margin-top: 20px; }
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-        .footer-right h4 { color: #fff; margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; opacity: 0.5; }
-        .footer-right a { color: #777; text-decoration: none; transition: 0.3s; font-size: 1rem; }
-        .footer-right a:hover { color: #fff; transform: translateX(10px); }
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+        }
     </style>
 </head>
 <body>
@@ -287,11 +327,11 @@
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeMail()">&times;</span>
-            <h2>Get in Touch</h2>
+            <h2>Send us a Message</h2>
             <form id="contactForm" class="mail-form">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <textarea name="message" rows="5" placeholder="Project details or inquiry..." required></textarea>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
                 <button type="submit" id="submitBtn">Send Message</button>
             </form>
         </div>
@@ -300,31 +340,31 @@
     <div id="hero">
         <div class="hero-content" data-aos="zoom-out">
             <h1>Pixelaks Technologies</h1>
-            <p>"Engineering high-performance software solutions and immersive interactive experiences for a digital-first world."</p>
+            <p>"Engineering the future of digital interaction through immersive gaming experiences and high-performance software solutions."</p>
         </div>
     </div>
 
     <section id="about" data-aos="fade-up">
-        <h2 class="section-title">Studio Profile</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8; color: #999; font-size: 1.15rem;">
-            Pixelaks is an innovation hub where engineering meets creativity. We specialize in building robust SaaS architectures and visually stunning game environments using industry-standard technology.
+        <h2 class="section-title">Who We Are</h2>
+        <p style="text-align: center; max-width: 850px; margin: 0 auto; line-height: 1.8; color: #ddd; font-style: italic; font-size: 1.1rem;">
+            Pixelaks is a multi-disciplinary technology studio. We bridge the gap between high-performance administrative software and immersive interactive entertainment.
         </p>
 
         <div class="values-grid">
             <div class="value-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-microchip"></i>
-                <h3>Advanced Logic</h3>
-                <p>We leverage C# and .NET to create complex, efficient systems that handle data with precision and speed.</p>
+                <i class="fas fa-rocket"></i>
+                <h3>Innovation First</h3>
+                <p>We don't just write code; we engineer experiences. Whether it's complex game physics or cloud architecture, we push boundaries.</p>
             </div>
             <div class="value-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-cloud-shield"></i>
-                <h3>Cloud Security</h3>
-                <p>Integrated with Firebase Cloud, our solutions feature real-time sync and enterprise-grade data protection.</p>
+                <i class="fas fa-layer-group"></i>
+                <h3>Scalable Design</h3>
+                <p>Our solutions are built to grow. From a single user to thousands, our software remains stable, secure, and fast.</p>
             </div>
             <div class="value-card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-vial"></i>
-                <h3>Optimized UX</h3>
-                <p>Performance is our priority. We optimize every interaction for 60 FPS fluidity on any hardware.</p>
+                <i class="fas fa-users"></i>
+                <h3>User-Centric</h3>
+                <p>We believe technology should be intuitive. Every button, menu, and interaction is designed with the user in mind.</p>
             </div>
         </div>
     </section>
@@ -336,74 +376,55 @@
             <div class="tech-item"><i class="fab fa-android"></i><span>Android</span></div>
             <div class="tech-item"><i class="fas fa-fire"></i><span>Firebase</span></div>
             <div class="tech-item"><i class="fas fa-credit-card"></i><span>Razorpay</span></div>
-            <div class="tech-item"><i class="fas fa-cloud"></i><span>Cloud Infrastructure</span></div>
+            <div class="tech-item"><i class="fas fa-cloud"></i><span>Cloud Systems</span></div>
         </div>
         <div class="attr-text">
             Unity, Firebase, Android, and Razorpay are trademarks of their respective owners. <br>
-            Pixelaks Technologies is an independent software studio utilizing these standard-setting technologies.
+            Pixelaks Technologies is an independent developer utilizing these industry-standard technologies for robust educational solutions.
         </div>
     </div>
 
-    <section id="stats" data-aos="fade-up" style="padding: 60px 0; background: linear-gradient(to right, transparent, rgba(52, 152, 219, 0.05), transparent);">
-        <div style="display: flex; justify-content: center; gap: clamp(40px, 10vw, 120px); flex-wrap: wrap; text-align: center;">
-            <div data-aos="zoom-in" data-aos-delay="100">
-                <h3 style="font-size: 2.8rem; color: #fff; margin: 0; font-weight: 300;">60 FPS</h3>
-                <span style="color: var(--primary-blue); font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px;">Native Performance</span>
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="200">
-                <h3 style="font-size: 2.8rem; color: #fff; margin: 0; font-weight: 300;">99.9%</h3>
-                <span style="color: var(--primary-blue); font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px;">Uptime Guarantee</span>
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="300">
-                <h3 style="font-size: 2.8rem; color: #fff; margin: 0; font-weight: 300;">AES-256</h3>
-                <span style="color: var(--primary-blue); font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px;">Data Encryption</span>
-            </div>
-        </div>
-    </section>
-
     <section id="divisions" data-aos="fade-up">
-        <h2 class="section-title">Business Divisions</h2>
+        <h2 class="section-title">Our Divisions</h2>
         <div class="division-container">
             <a href="games" class="division-link" data-aos="fade-right">
                 <div class="division-card game-side">
-                    <div>
-                        <span style="font-size: 0.7rem; color: #666; letter-spacing: 3px; text-transform: uppercase; font-weight: bold;">Interactive Division</span>
-                        <h2 style="color: var(--primary-violet); margin: 15px 0;">Games & Entertainment</h2>
-                        <p style="color: #777;">Engaging casual experiences and educational interaction design.</p>
-                    </div>
+                    <div><h2 style="color: #9b59b6; margin-top:0;">Game Division</h2><p>High-quality casual and educational gaming.</p></div>
                     <div class="btn-hub btn-violet">Explore Games</div>
                 </div>
             </a>
             <a href="adhyora" class="division-link" data-aos="fade-left">
                 <div class="division-card software-side">
-                    <div>
-                        <span style="font-size: 0.7rem; color: #666; letter-spacing: 3px; text-transform: uppercase; font-weight: bold;">Enterprise Division</span>
-                        <h2 style="color: var(--primary-green); margin: 15px 0;">SaaS & Software</h2>
-                        <p style="color: #777;">High-performance administrative tools and campus management.</p>
-                    </div>
+                    <div><h2 style="color: #2ecc71; margin-top:0;">Software Division</h2><p>Future-ready campus administration tools.</p></div>
                     <div class="btn-hub btn-green">View Solutions</div>
                 </div>
             </a>
         </div>
     </section>
 
-    <section id="workflow" data-aos="fade-up">
-        <h2 class="section-title" style="font-size: 2rem;">The Engineering Process</h2>
-        <div class="values-grid" style="margin-top: 20px;">
-            <div class="value-card" style="padding: 30px; text-align: left;">
-                <h4 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 0.8rem; letter-spacing: 2px;">PHASE 01</h4>
-                <h3 style="margin-bottom: 10px; font-size: 1.2rem;">Architecting</h3>
-                <p style="font-size: 0.85rem; color: #666;">Designing logic-driven system flows that prioritize security and user interaction.</p>
+    <section id="features" style="padding-top: 50px;">
+        <h2 class="section-title" style="font-size: 2rem;">The Pixelaks Advantage</h2>
+        <div class="why-grid">
+            <div class="why-card" data-aos="fade-up">
+                <i class="fas fa-headset"></i>
+                <div class="why-content">
+                    <h4>Dedicated Support</h4>
+                    <p>We stand by our products with ongoing maintenance and dedicated technical support.</p>
+                </div>
             </div>
-            <div class="value-card" style="padding: 30px; text-align: left;">
-                <h4 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 0.8rem; letter-spacing: 2px;">PHASE 02</h4>
-                <h3 style="margin-bottom: 10px; font-size: 1.2rem;">Core Development</h3>
-                <p style="font-size: 0.85rem; color: #666;">Writing clean, modular C# code integrated with scalable Firebase cloud backends.</p>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-shield-alt"></i>
+                <div class="why-content">
+                    <h4>Security Standard</h4>
+                    <p>Data privacy is paramount. We employ industry-standard encryption for all our applications.</p>
+                </div>
             </div>
-            <div class="value-card" style="padding: 30px; text-align: left;">
-                <h4 style="color: var(--primary-blue); margin: 0 0 10px 0; font-size: 0.8rem; letter-spacing: 2px;">PHASE 03</h4>
-                <h3 style="margin-bottom: 10px; font-size: 1.2rem;">Quality & Deployment</h3>
-                <p style="font-size: 0.85rem; color: #666;">Rigorous performance testing ensures seamless deployment across Android and Web.</p>
+            <div class="why-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-pencil-ruler"></i>
+                <div class="why-content">
+                    <h4>Tailored Solutions</h4>
+                    <p>We don't do cookie-cutter. Every solution is customized to fit the specific needs of the client.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -412,16 +433,16 @@
         <div class="footer-grid">
             <div class="footer-left">
                 <h3 style="color: #fff; margin-bottom: 10px;">Pixelaks Technologies</h3>
-                <p style="color: #555; font-style: italic; margin-bottom: 25px;">Advancing digital standards through code and design.</p>
+                <p style="color: #aaa; font-style: italic; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
                 <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/pixelaksofficial" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/pixelaksofficial?igsh=eHNhcmYwMnNkcTYx" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
 
             <div class="footer-right">
-                <h4>Sitemap</h4>
+                <h4>Navigation</h4>
                 <a href="javascript:void(0)" onclick="scrollToSection('hero')">Home</a>
                 <a href="javascript:void(0)" onclick="scrollToSection('about')">About Us</a>
                 <a href="javascript:void(0)" onclick="scrollToSection('divisions')">Products</a>
@@ -429,13 +450,14 @@
                 <a href="terms">Terms & Conditions</a>
             </div>
         </div>
-        <p style="text-align:center; color:#333; margin-top:80px; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px;">&copy; 2026 PIXELAKS TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+        <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     
     <script>
+        // 1. PRO MAILER SCRIPT
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
         const form = document.getElementById('contactForm');
         const btn = document.getElementById('submitBtn');
@@ -443,11 +465,11 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             btn.disabled = true;
-            btn.innerText = "Processing...";
+            btn.innerText = "Sending...";
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    btn.innerText = "Inquiry Sent";
+                    btn.innerText = "Message Sent!";
                     btn.style.background = "#2ecc71"; 
                     setTimeout(() => {
                         closeMail();
@@ -458,11 +480,14 @@
                     }, 2500);
                 })
                 .catch(error => {
-                    btn.innerText = "Error. Try again.";
+                    console.error('Error!', error.message);
+                    btn.innerText = "Error! Try again.";
                     btn.disabled = false;
+                    btn.style.background = "#e74c3c"; 
                 });
         });
 
+        // 2. MODAL CONTROLS
         function openMail() { document.getElementById("contactModal").style.display = "flex"; }
         function closeMail() { document.getElementById("contactModal").style.display = "none"; }
         window.onclick = function(event) {
@@ -470,27 +495,32 @@
             if (event.target == modal) { modal.style.display = "none"; }
         }
 
+        // 3. PARTICLES
         tsParticles.load("tsparticles", {
             particles: {
-                number: { value: 100, density: { enable: true, area: 1000 } },
+                number: { value: 120, density: { enable: true, area: 800 } },
                 color: { value: "#3498db" }, 
-                links: { enable: true, distance: 180, color: "#3498db", opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 1.2 },
-                opacity: { value: 0.3 },
-                size: { value: { min: 1, max: 2 } }
+                links: { enable: true, distance: 150, color: "#3498db", opacity: 0.3, width: 1 },
+                move: { enable: true, speed: 1.5, outModes: { default: "out" } },
+                opacity: { value: 0.4 },
+                size: { value: { min: 1, max: 3 } }
             },
             interactivity: {
                 events: { onHover: { enable: true, mode: "grab" } },
-                modes: { grab: { distance: 200, links: { opacity: 0.4 } } }
+                modes: { grab: { distance: 200, links: { opacity: 0.5 } } }
             },
             background: { color: "#0a0a0a" }
         });
 
+        // 4. CONSOLIDATED ONLOAD LOGIC
         window.onload = function() {
             const stealthTarget = sessionStorage.getItem('scrollTarget');
+            
             if (stealthTarget) {
                 sessionStorage.removeItem('scrollTarget');
-                setTimeout(() => scrollToSection(stealthTarget), 300); 
+                setTimeout(() => {
+                    scrollToSection(stealthTarget);
+                }, 300); 
             } 
             else if (window.location.hash) {
                 const targetId = window.location.hash.substring(1);
@@ -499,16 +529,25 @@
                     window.history.replaceState(null, null, window.location.pathname);
                 }, 150); 
             }
-            AOS.init({ duration: 1100, once: true });
+            else {
+                window.scrollTo(0, 0);
+            }
+
+            AOS.init({ duration: 1100, once: false, mirror: true });
         };
 
+        // 5. SMOOTH SCROLL FUNCTION
         function scrollToSection(sectionId) {
             const element = document.getElementById(sectionId);
             if (element) {
                 const headerOffset = 80;
                 const elementPosition = element.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         }
     </script>
