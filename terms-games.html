@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Pixelaks Games</title>
+    
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* GAMES VIOLET THEME */
+            --theme-color: #9b59b6; 
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(20, 20, 20, 0.7);
+            --text-light: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; }
+
+        /* --- HEADER --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%; 
+            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        nav img { height: 50px; width: auto; transition: 0.3s; }
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
+        nav a:hover { color: var(--theme-color); }
+
+        @media (max-width: 600px) {
+            nav { height: 60px; padding: 0 3%; }
+            nav img { height: 35px; }
+            nav ul { gap: 12px; }
+            nav a { font-size: 0.85rem; }
+        }
+
+        /* --- GLASS CONTENT --- */
+        .legal-container {
+            max-width: 900px; width: 92%; margin: 150px auto 100px; padding: 50px;
+            background: rgba(10, 10, 10, 0.2); 
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            position: relative; z-index: 2;
+            overflow-wrap: break-word; word-wrap: break-word;
+        }
+
+        .legal-container p, .legal-container li { font-style: italic; color: rgba(255, 255, 255, 0.9); margin-bottom: 20px; font-size: 1.05rem; }
+        h1 { color: var(--theme-color); font-size: 2.5rem; margin-bottom: 30px; border-bottom: 2px solid var(--theme-color); display: inline-block; }
+        h2 { color: var(--theme-color); margin-top: 40px; font-size: 1.8rem; }
+        a { color: var(--theme-color); text-decoration: none; transition: 0.5s ease; }
+        strong { color: #fff; font-style: normal; }
+
+        @media (max-width: 600px) {
+            .legal-container { margin-top: 100px; padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 1.8rem; margin-bottom: 20px; }
+            h2 { font-size: 1.4rem; margin-top: 30px; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(15px);
+            padding: 80px 10% 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; z-index: 2;
+        }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--theme-color); text-shadow: 0 0 15px var(--theme-color); }
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--theme-color); transform: scale(1.2); }
+        
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+        }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(15px); justify-content: center; align-items: center; }
+        .modal-content { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); padding: 30px; border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid var(--theme-color); position: relative; box-shadow: 0 0 30px rgba(0,0,0, 0.5); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .mail-form input, .mail-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none; }
+        .mail-form button { width: 100%; padding: 15px; background: var(--theme-color); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white; }
+    </style>
+</head>
+<body>
+    <div id="tsparticles"></div>
+
+    <nav>
+        <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
+        </ul>
+    </nav>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeMail()">&times;</span>
+            <h2 style="text-align:center; color:var(--theme-color);">Send us a Message</h2>
+            <form id="contactForm" class="mail-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
+                <button type="submit" id="submitBtn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="legal-container">
+        <h1>Terms & Conditions for Games</h1>
+        <p><strong>Effective Date:</strong> January 1, 2026</p>
+        
+        <p>By downloading or using Pixelaks Games, these terms will automatically apply to you – you should make sure therefore that you read them carefully before using the game. You’re not allowed to copy or modify the games, any part of the game, or our trademarks in any way.</p>
+        
+        <h2>1. Restrictions</h2>
+        <p>You’re not allowed to attempt to extract the source code of the game, and you also shouldn’t try to translate the game into other languages, or make derivative versions. The game itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Pixelaks Technologies.</p>
+
+        <h2>2. Data & Security</h2>
+        <p>Our games may store and process personal data that you have provided to us, in order to provide our Service. It’s your responsibility to keep your phone and access to the game secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device.</p>
+
+        <h2>3. Connectivity</h2>
+        <p>Certain functions of the game will require an active internet connection. The connection can be Wi-Fi, or provided by your mobile network provider, but Pixelaks Technologies cannot take responsibility for the game not working at full functionality if you don’t have access to Wi-Fi, and you don’t have any of your data allowance left.</p>
+
+        <h2>4. Updates</h2>
+        <p>We may wish to update the game. The requirements for both Android & iOS systems may change, and you’ll need to download the updates if you want to keep playing the game. Pixelaks Technologies does not promise that it will always update the game so that it is relevant to you and/or works with the Android & iOS version that you have installed on your device.</p>
+
+        <h2>5. Contact Us</h2>
+        <p>If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at <strong>pixelaks.technologies@gmail.com</strong>.</p>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-left">
+                <h3>Pixelaks Technologies</h3>
+                <p style="font-style: italic; color: #aaa; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
+                <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pixelaksofficial?igsh=eHNhcmYwMnNkcTYx" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <h4>Navigation</h4>
+                <a href="/">Home</a>
+                <a href="/#about">About Us</a>
+                <a href="/#divisions">Products</a>
+                <a href="privacy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
+            </div>
+        </div>
+        <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        // --- VIOLET PARTICLES FOR GAMES ---
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 100, density: { enable: true, area: 800 } },
+                color: { value: "#9b59b6" }, // VIOLET
+                links: { enable: true, distance: 150, color: "#9b59b6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 1.5, outModes: { default: "out" } },
+                opacity: { value: 0.5 },
+                size: { value: { min: 1, max: 4 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 250, links: { opacity: 0.7 } } }
+            },
+            background: { color: "#050505" }
+        });
+
+        // --- MAILER SCRIPT ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true; btn.innerText = "Sending...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    btn.innerText = "Message Sent!"; btn.style.background = "#9b59b6";
+                    setTimeout(() => { closeMail(); form.reset(); btn.disabled = false; btn.innerText = "Send Message"; btn.style.background = ""; }, 2500);
+                })
+                .catch(error => { btn.innerText = "Error! Try again."; btn.disabled = false; btn.style.background = "#e74c3c"; });
+        });
+
+        // --- UTILS ---
+        function openMail() { document.getElementById("contactModal").style.display = "flex"; }
+        function closeMail() { document.getElementById("contactModal").style.display = "none"; }
+        window.onclick = function(event) { if (event.target == document.getElementById("contactModal")) { closeMail(); } }
+        window.onload = function() { setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300); };
+    </script>
+</body>
+</html>
