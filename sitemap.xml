@@ -25,4 +25,25 @@
     <lastmod>2026-01-01</lastmod>
     <priority>0.30</priority>
   </url>
+  
+  <url>
+    <loc>https://pixelaks.in/privacy-adhyora</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://pixelaks.in/privacy-games</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://pixelaks.in/terms-adhyora</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://pixelaks.in/terms-games</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.30</priority>
+  </url>
 </urlset>
