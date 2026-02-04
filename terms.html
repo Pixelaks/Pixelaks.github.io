@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-     <script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -42,68 +41,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
+        /* --- 1. GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         :root {
-            --primary-blue: #3498db;
+            /* PIXELAKS BLUE THEME */
+            --theme-color: #3498db; 
             --dark-bg: #0a0a0a;
-            --card-bg: rgba(26, 26, 26, 0.9);
             --glass-bg: rgba(20, 20, 20, 0.7);
             --text-light: #ffffff;
         }
 
         html { scroll-behavior: smooth; }
-
         body {
-            margin: 0;
-            padding: 0;
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- Background Particles --- */
-        #tsparticles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; }
 
-        /* --- Standardized Header --- */
+        /* --- HEADER --- */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 80px; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%; 
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 1000;
-            box-sizing: border-box;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%; 
+            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         nav img { height: 50px; width: auto; transition: 0.3s; }
-        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; align-items: center; }
-        nav ul li { font-style: normal !important; } 
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 500; 
-            font-style: normal !important; 
-            font-size: 1rem;
-            transition: 0.3s; 
-            white-space: nowrap;
-        }
-        nav a:hover { color: var(--primary-blue); }
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
+        nav a:hover { color: var(--theme-color); }
 
-        /* Responsive Header Adjustment */
         @media (max-width: 600px) {
             nav { height: 60px; padding: 0 3%; }
             nav img { height: 35px; }
@@ -111,135 +84,91 @@
             nav a { font-size: 0.85rem; }
         }
 
-        /* --- Glass Contact Modal --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            backdrop-filter: blur(15px);
-            justify-content: center;
-            align-items: center;
+        /* --- SELECTION CONTAINER --- */
+        .hub-container {
+            max-width: 1000px; width: 92%; margin: 150px auto 100px;
+            text-align: center; position: relative; z-index: 2;
         }
 
-        .modal-content {
-            background: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(20px);
-            padding: 30px;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid rgba(52, 152, 219, 0.5);
-            position: relative;
-            box-shadow: 0 0 30px rgba(52, 152, 219, 0.2);
-            box-sizing: border-box;
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
+        .sub-text { color: #aaa; margin-bottom: 50px; font-style: italic; }
+
+        .policy-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
         }
 
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
-
-        .mail-form input, .mail-form textarea {
-            width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; box-sizing: border-box; outline: none;
+        /* --- CARD STYLES --- */
+        .policy-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            backdrop-filter: blur(10px);
         }
 
-        .mail-form button {
-            width: 100%; padding: 15px; background: var(--primary-blue); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white;
+        .policy-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        /* --- Content Layout --- */
-        .legal-container {
-            max-width: 900px;
-            margin: 150px auto 100px;
-            padding: 50px;
-            background: rgba(10, 10, 10, 0.4); 
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            position: relative;
-            z-index: 2;
-            box-sizing: border-box;
-            width: 92%;
-        }
+        /* Adhyora Card Specifics */
+        .card-adhyora { border-top: 4px solid #2ecc71; }
+        .card-adhyora:hover { box-shadow: 0 20px 50px rgba(46, 204, 113, 0.15); border-color: #2ecc71; }
+        .card-adhyora i { color: #2ecc71; font-size: 3rem; margin-bottom: 20px; }
+        .card-adhyora h3 { color: #2ecc71; margin-bottom: 10px; font-size: 1.5rem; }
 
-        .legal-container p, .legal-container li { 
-            font-style: italic; 
-            color: rgba(255, 255, 255, 0.85); 
-            margin-bottom: 20px; 
-            font-size: 1.05rem;
-        }
+        /* Games Card Specifics */
+        .card-games { border-top: 4px solid #9b59b6; }
+        .card-games:hover { box-shadow: 0 20px 50px rgba(155, 89, 182, 0.15); border-color: #9b59b6; }
+        .card-games i { color: #9b59b6; font-size: 3rem; margin-bottom: 20px; }
+        .card-games h3 { color: #9b59b6; margin-bottom: 10px; font-size: 1.5rem; }
 
-        h1 { color: var(--primary-blue); font-size: 2.5rem; margin-bottom: 30px; border-bottom: 2px solid var(--primary-blue); display: inline-block; }
-        h2 { color: var(--primary-blue); margin-top: 40px; font-size: 1.8rem; }
-        
-        a { color: var(--primary-blue); text-decoration: none; }
+        .policy-card p { color: #888; font-size: 0.95rem; line-height: 1.6; }
 
-        /* Responsive Container Adjustment */
-        @media (max-width: 600px) {
-            .legal-container { margin-top: 100px; padding: 25px; border-radius: 20px; }
-            h1 { font-size: 1.8rem; margin-bottom: 20px; }
-            h2 { font-size: 1.4rem; margin-top: 30px; }
-            .legal-container p, .legal-container li { font-size: 0.95rem; }
-        }
-
-        /* --- Standardized Footer --- */
+        /* --- FOOTER --- */
         footer {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(15px);
-            padding: 80px 10% 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 2;
-            box-sizing: border-box;
+            background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(15px);
+            padding: 80px 10% 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; z-index: 2;
         }
-
         .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
         .footer-left { flex: 1; min-width: 300px; }
         .footer-right { display: flex; flex-direction: column; gap: 12px; text-align: left; }
-        
-        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; font-style: normal !important; }
-        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; font-style: normal !important; }
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
         .footer-right a:hover { color: white; padding-left: 10px; }
-
-        #footer-email { 
-            color: #fff; 
-            cursor: pointer; 
-            display: inline-block;
-            transition: 0.4s ease;
-            font-weight: 500;
-            font-style: normal !important;
-            word-break: break-all;
-        }
-        #footer-email:hover { 
-            color: var(--primary-blue); 
-            text-shadow: 0 0 15px var(--primary-blue);
-        }
-
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--theme-color); text-shadow: 0 0 15px var(--theme-color); }
         .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
-        .social-icons a:hover { color: #3498db; transform: scale(1.2); }
-
+        .social-icons a:hover { color: var(--theme-color); transform: scale(1.2); }
+        
         @media (max-width: 850px) {
             .footer-grid { flex-direction: column; gap: 40px; }
             footer { padding: 60px 5% 40px; }
         }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(15px); justify-content: center; align-items: center; }
+        .modal-content { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); padding: 30px; border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid var(--theme-color); position: relative; box-shadow: 0 0 30px rgba(0,0,0, 0.5); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .mail-form input, .mail-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none; }
+        .mail-form button { width: 100%; padding: 15px; background: var(--theme-color); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white; }
     </style>
 </head>
 <body>
     <div id="tsparticles"></div>
 
     <nav>
-        <div class="nav-brand">
-            <img src="logo.png" alt="Pixelaks"> 
-        </div>
+        <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="javascript:void(0)" onclick="stealthNav('about')">About</a></li>
-            <li><a href="javascript:void(0)" onclick="stealthNav('divisions')">Products</a></li>
+            <li><a href="/#about">About</a></li> 
+            <li><a href="/#divisions">Products</a></li>
             <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
         </ul>
     </nav>
@@ -247,7 +176,7 @@
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeMail()">&times;</span>
-            <h2 style="text-align:center; color:var(--primary-blue);">Send us a Message</h2>
+            <h2 style="text-align:center; color:var(--theme-color);">Send us a Message</h2>
             <form id="contactForm" class="mail-form">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
@@ -257,136 +186,93 @@
         </div>
     </div>
 
-    <div class="legal-container">
-        <h1>Terms and Conditions</h1>
-        <p>By downloading or using the game, these terms will automatically apply to you – you should make sure therefore that you read them carefully before using the game. You’re not allowed to copy, or modify the games that we created, any part of the game, or our trademarks in any way. You’re not allowed to attempt to extract the source code of the game, and you also shouldn’t try to translate the game into other languages, or make derivative versions. The game itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Pixelaks Games.</p>
-        
-        <p>The games That we created maybe stores and processes personal data that you have provided to us, in order to provide our Service. It’s your responsibility to keep your phone and access to the game secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device.</p>
+    <div class="hub-container" data-aos="fade-up">
+        <h1>Terms of Service</h1>
+        <p class="sub-text">Please select the relevant agreement for the service you are using.</p>
 
-        <p>You should be aware that there are certain things that Pixelaks Games will not take responsibility for. Certain functions of the game will require the game to have an active internet connection. The connection can be Wi-Fi, or provided by your mobile network provider, but Pixelaks Games cannot take responsibility for the game not working at full functionality if you don’t have access to Wi-Fi.</p>
+        <div class="policy-grid">
+            <a href="terms-adhyora.html" class="policy-card card-adhyora">
+                <i class="fas fa-file-contract"></i>
+                <h3>Adhyora SaaS</h3>
+                <p>Institutional Agreements, Service Level Agreement (SLA), and Liability Disclaimer.</p>
+            </a>
 
-        <p>At some point, we may wish to update the game. The game is currently available on Android & iOS – the requirements for both systems may change, and you’ll need to download the updates if you want to keep playing the game. Pixelaks Games does not promise that it will always update the game so that it is relevant to you.</p>
-
-        <h2>Changes to This Terms and Conditions</h2>
-        <p>We may update our Terms and Conditions from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Terms and Conditions on this page. These changes are effective immediately after they are posted on this page.</p>
-
-        <h2>Contact Us</h2>
-        <p>If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at <a href="mailto:aksgames03@gmail.com" style="color: var(--primary-blue); text-decoration: none;">aksgames03@gmail.com</a>.</p>
+            <a href="terms-games.html" class="policy-card card-games">
+                <i class="fas fa-scroll"></i>
+                <h3>Pixelaks Games</h3>
+                <p>End User License Agreement (EULA), Fair Play Policy, and Usage Rights.</p>
+            </a>
+        </div>
     </div>
 
     <footer>
         <div class="footer-grid">
             <div class="footer-left">
                 <h3>Pixelaks Technologies</h3>
-                <p style="font-style: italic; color: #aaa;">Innovative software and gaming experiences.</p>
+                <p style="font-style: italic; color: #aaa; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
                 <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/pixelaksofficial?igsh=eHNhcmYwMnNkcTYx" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/pixelaksofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253" target="_blank"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-    
             <div class="footer-right">
                 <h4>Navigation</h4>
                 <a href="/">Home</a>
-                <a href="javascript:void(0)" onclick="stealthNav('about')">About Us</a>
-                <a href="javascript:void(0)" onclick="stealthNav('divisions')">Products</a>
-                <a href="privacy">Privacy Policy</a>
-                <a href="terms">Terms & Conditions</a>
+                <a href="/#about">About Us</a>
+                <a href="/#divisions">Products</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
             </div>
         </div>
-        <p style="text-align:center; color:#555; margin-top:60px; font-style: normal !important;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
+        <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     <script>
-        // 1. FORCE SCROLL TO TOP ON REFRESH (Fixed)
-        window.onbeforeunload = function () { window.scrollTo(0, 0); };
-        window.onload = function() {
-            window.scrollTo(0, 0);
-        };
+        // --- BLUE PARTICLES (PIXELAKS DEFAULT) ---
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 100, density: { enable: true, area: 800 } },
+                color: { value: "#3498db" }, 
+                links: { enable: true, distance: 150, color: "#3498db", opacity: 0.3, width: 1 },
+                move: { enable: true, speed: 1.5, outModes: { default: "out" } },
+                opacity: { value: 0.4 },
+                size: { value: { min: 1, max: 3 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 200, links: { opacity: 0.5 } } }
+            },
+            background: { color: "#0a0a0a" }
+        });
 
-        // 2. MAILER SCRIPT
+        // --- MAILER SCRIPT ---
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
         const form = document.getElementById('contactForm');
         const btn = document.getElementById('submitBtn');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            btn.disabled = true;
-            btn.innerText = "Sending...";
-
+            btn.disabled = true; btn.innerText = "Sending...";
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    btn.innerText = "Message Sent!";
-                    btn.style.background = "#2ecc71"; // Success Green
-                    setTimeout(() => {
-                        closeMail();
-                        form.reset();
-                        btn.disabled = false;
-                        btn.innerText = "Send Message";
-                        btn.style.background = ""; 
-                    }, 2500);
+                    btn.innerText = "Message Sent!"; btn.style.background = "#3498db";
+                    setTimeout(() => { closeMail(); form.reset(); btn.disabled = false; btn.innerText = "Send Message"; btn.style.background = ""; }, 2500);
                 })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    btn.innerText = "Error! Try again.";
-                    btn.disabled = false;
-                    btn.style.background = "#e74c3c"; // Error Red
-                });
+                .catch(error => { btn.innerText = "Error! Try again."; btn.disabled = false; btn.style.background = "#e74c3c"; });
         });
 
-        // 3. MODAL CONTROLS
+        // --- UTILS ---
         function openMail() { document.getElementById("contactModal").style.display = "flex"; }
         function closeMail() { document.getElementById("contactModal").style.display = "none"; }
-        window.onclick = function(event) {
-            let modal = document.getElementById("contactModal");
-            if (event.target == modal) { modal.style.display = "none"; }
-        }
-
-        // 4. PARTICLES
-        tsParticles.load("tsparticles", {
-            particles: {
-                number: { value: 120, density: { enable: true, area: 800 } },
-                color: { value: "#3498db" }, 
-                links: { 
-                    enable: true, 
-                    distance: 150, 
-                    color: "#3498db", 
-                    opacity: 0.4, 
-                    width: 1 
-                },
-                move: { 
-                    enable: true, 
-                    speed: 1.8, 
-                    outModes: { default: "out" } 
-                },
-                opacity: { value: 0.5 },
-                size: { value: { min: 1, max: 4 } }
-            },
-            interactivity: {
-                events: { onHover: { enable: true, mode: "grab" } },
-                modes: { grab: { distance: 250, links: { opacity: 0.7 } } }
-            },
-            background: { color: "#050505" }
-        });
-
-        // 5. STEALTH NAV
-        function stealthNav(sectionId) {
-            // 1. Save the target
-            sessionStorage.setItem('scrollTarget', sectionId);
-            // 2. Go to the root domain
-            window.location.assign('/');
-        }
+        window.onclick = function(event) { if (event.target == document.getElementById("contactModal")) { closeMail(); } }
+        
+        window.onload = function() { 
+            setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300);
+            AOS.init({ duration: 1100, once: false, mirror: true });
+        };
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
