@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Adhyora</title>
+    
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* ADHYORA GREEN THEME */
+            --theme-color: #2ecc71; 
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(20, 20, 20, 0.7);
+            --text-light: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; }
+
+        /* --- HEADER --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%; 
+            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        nav img { height: 50px; width: auto; transition: 0.3s; }
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
+        nav a:hover { color: var(--theme-color); }
+
+        @media (max-width: 600px) {
+            nav { height: 60px; padding: 0 3%; }
+            nav img { height: 35px; }
+            nav ul { gap: 12px; }
+            nav a { font-size: 0.85rem; }
+        }
+
+        /* --- GLASS CONTENT --- */
+        .legal-container {
+            max-width: 900px; width: 92%; margin: 150px auto 100px; padding: 50px;
+            background: rgba(10, 10, 10, 0.2); 
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            position: relative; z-index: 2;
+            overflow-wrap: break-word; word-wrap: break-word;
+        }
+
+        .legal-container p, .legal-container li { font-style: normal; color: rgba(255, 255, 255, 0.85); margin-bottom: 15px; font-size: 1rem; text-align: justify; }
+        h1 { color: var(--theme-color); font-size: 2.5rem; margin-bottom: 30px; border-bottom: 2px solid var(--theme-color); display: inline-block; }
+        h2 { color: var(--theme-color); margin-top: 40px; margin-bottom: 15px; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { color: #fff; margin-top: 20px; font-size: 1.2rem; }
+        a { color: var(--theme-color); text-decoration: none; transition: 0.5s ease; }
+        strong { color: #fff; font-weight: bold; }
+        ul { margin-left: 20px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
+
+        @media (max-width: 600px) {
+            .legal-container { margin-top: 100px; padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 1.8rem; margin-bottom: 20px; }
+            h2 { font-size: 1.3rem; margin-top: 30px; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(15px);
+            padding: 80px 10% 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; z-index: 2;
+        }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--theme-color); text-shadow: 0 0 15px var(--theme-color); }
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--theme-color); transform: scale(1.2); }
+        
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+        }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(15px); justify-content: center; align-items: center; }
+        .modal-content { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); padding: 30px; border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid var(--theme-color); position: relative; box-shadow: 0 0 30px rgba(0,0,0, 0.5); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .mail-form input, .mail-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none; }
+        .mail-form button { width: 100%; padding: 15px; background: var(--theme-color); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white; }
+    </style>
+</head>
+<body>
+    <div id="tsparticles"></div>
+
+    <nav>
+        <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
+        </ul>
+    </nav>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeMail()">&times;</span>
+            <h2 style="text-align:center; color:var(--theme-color);">Send us a Message</h2>
+            <form id="contactForm" class="mail-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
+                <button type="submit" id="submitBtn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="legal-container">
+    <h1>Adhyora Terms of Service</h1>
+    <p><strong>Effective Date:</strong> January 1, 2026</p>
+
+    <p>Welcome to <strong>Adhyora</strong>, a cloud-based academic management platform provided by Pixelaks Technologies. By accessing or using Adhyora, the Institution agrees to the following Terms of Service, which govern the use of our application, infrastructure, and associated services.</p>
+
+    <h2>1. Definitions</h2>
+    <ul>
+        <li><strong>"Institution"</strong> refers to the college or educational organization using Adhyora.</li>
+        <li><strong>"Users"</strong> refers to Principals, Admins, Teachers, and Students who access the platform.</li>
+        <li><strong>"Service"</strong> refers to the Adhyora application, backend services, and related features.</li>
+        <li><strong>"Data"</strong> refers to academic and operational information entered into the system.</li>
+        <li><strong>"Subscription"</strong> refers to the paid plan that enables continued access to Adhyora.</li>
+    </ul>
+
+    <h2>2. Service Description</h2>
+    <p>Adhyora is an academic management platform designed to streamline and digitalize college administration. The Service includes a range of features such as attendance management, internal assessment management, academic reporting, communication tools, and other administrative workflows that may be added or improved over time.</p>
+
+    <h2>3. Onboarding & Support</h2>
+    <ul>
+        <li><strong>Initial Setup:</strong> Pixelaks Technologies will configure your Institution in our secure database and assist with uploading initial student lists and academic calendar data.</li>
+        <li><strong>Ongoing Management:</strong> After setup, the Institution manages its own data. Pixelaks Technologies continues to provide technical support related to system functionality, login, data uploads, and app performance.</li>
+    </ul>
+
+    <h2>4. User Accounts & Access Control</h2>
+    <ul>
+        <li>The Institution is responsible for ensuring that only authorized staff access administrative features.</li>
+        <li>The Principal/Admin must manage login credentials, room codes, and permissions securely.</li>
+        <li>Users may not attempt to bypass or manipulate authentication, room-code access, or system-level security rules.</li>
+        <li>Any misuse of accounts is the Institution’s responsibility.</li>
+    </ul>
+
+    <h2>5. Acceptable Use Policy</h2>
+    <ul>
+        <li>Attempting to access data belonging to another Institution is strictly prohibited.</li>
+        <li>Users may not reverse engineer, copy, or replicate any part of the Service.</li>
+        <li>Uploading harmful files, scripts, or performing actions that may affect system stability is prohibited.</li>
+        <li>Users may not interfere with system performance or attempt unauthorized access.</li>
+        <li>Adhyora must not be used for any unlawful or non-educational purposes.</li>
+    </ul>
+
+    <h2>6. Subscription & Payments</h2>
+    <ul>
+        <li><strong>Subscription Model:</strong> Adhyora operates on a recurring subscription basis.</li>
+        <li><strong>Grace Period:</strong> If renewal payment fails or delays occur, an <strong>8-day grace period</strong> keeps the Service active.</li>
+        <li><strong>Service Suspension:</strong> After the grace period, the Service will be inaccessible until payment is completed.</li>
+        <li><strong>Data Retention:</strong> If a subscription remains inactive for over <strong>30 days</strong>, Pixelaks Technologies may remove the Institution’s data. Attempts will be made to notify the Institution before deletion.</li>
+        <li><strong>Refunds:</strong> Subscription payments are non-refundable once activated unless legally required.</li>
+    </ul>
+
+    <h2>7. Data Security & Privacy</h2>
+    <ul>
+        <li>All data is securely stored on industry-standard cloud infrastructure.</li>
+        <li>Strong security rules ensure strict isolation between institutions.</li>
+        <li>The Institution retains full ownership of its data; Pixelaks Technologies is only the processor and custodian.</li>
+        <li>Data is never shared or sold to third parties.</li>
+        <li>While redundancy and backups are maintained, absolute protection against data loss cannot be guaranteed.</li>
+    </ul>
+
+    <h2>8. Institutional Responsibilities</h2>
+    <ul>
+        <li>Ensure that authorized staff verify the accuracy of academic data before uploading or updating it in the system.</li>
+        <li>Maintain secure control over admin credentials and room-code access.</li>
+        <li>Ensure compliance with applicable educational regulations.</li>
+    </ul>
+
+    <h2>9. Intellectual Property Rights</h2>
+    <p>All content, source code, design elements, features, and materials provided as part of the Adhyora platform are the intellectual property of Pixelaks Technologies. The Institution is granted a limited, non-transferable license to use the Service. The Institution may not copy, modify, replicate, distribute, or create derivative works based on the Adhyora platform.</p>
+
+    <h2>10. Termination</h2>
+    <ul>
+        <li>The Institution may discontinue usage at any time by requesting account termination.</li>
+        <li>Upon termination or subscription expiry, the Institution may request data export before deletion.</li>
+        <li>Pixelaks Technologies may terminate access for violation of these Terms or misuse of the platform.</li>
+    </ul>
+
+    <h2>11. Limitation of Liability</h2>
+    <p>Adhyora assists with academic management but does not replace institutional verification. Pixelaks Technologies is not responsible for academic decisions such as exam eligibility, attendance-based decisions, or errors resulting from incorrect data entered by staff. Service availability depends on internet connectivity and third-party infrastructure uptime.</p>
+
+    <h2>12. Modification of Terms</h2>
+    <p>Pixelaks Technologies may update these Terms periodically. Institutions will be notified of significant changes. Continued use of Adhyora after updates constitutes acceptance of the revised Terms.</p>
+
+    <h2>13. Governing Law</h2>
+    <p>These Terms shall be governed by the laws of India. Any disputes will be resolved in the jurisdiction of Kerala, India.</p>
+
+    <h2>14. Data Loss & Service Continuity Disclaimer</h2>
+    <p>Pixelaks Technologies takes all reasonable measures to protect data through secure infrastructure, backups, and monitoring. However, no digital service can guarantee absolute protection against data loss, corruption, or system failure. Pixelaks Technologies is not liable for data loss caused by technical failures, outages, server errors, third-party service issues, or events beyond reasonable control.</p>
+    <p>The Institution is encouraged to maintain its own offline copies of critical academic information whenever necessary.</p>
+
+    <h2>15. Discontinuation of Service</h2>
+    <p>Pixelaks Technologies reserves the right to modify, suspend, or discontinue the Adhyora Service at any time, with reasonable prior notice to the Institution. In the event of permanent discontinuation, Institutions will be provided an opportunity to export their data before shutdown. Pixelaks Technologies shall not be liable for any losses arising from the discontinuation of the Service.</p>
+
+    <h2>16. Contact Us</h2>
+    <p><strong>Pixelaks Technologies</strong><br>
+    Email: pixelaks.technologies@gmail.com</p>
+</div>
+
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-left">
+                <h3>Pixelaks Technologies</h3>
+                <p style="font-style: italic; color: #aaa; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
+                <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pixelaksofficial?igsh=eHNhcmYwMnNkcTYx" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <h4>Navigation</h4>
+                <a href="/">Home</a>
+                <a href="/#about">About Us</a>
+                <a href="/#divisions">Products</a>
+                <a href="privacy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
+            </div>
+        </div>
+        <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        // --- GREEN PARTICLES FOR ADHYORA ---
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 100, density: { enable: true, area: 800 } },
+                color: { value: "#2ecc71" }, // GREEN
+                links: { enable: true, distance: 150, color: "#2ecc71", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 1.5, outModes: { default: "out" } },
+                opacity: { value: 0.5 },
+                size: { value: { min: 1, max: 4 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 250, links: { opacity: 0.7 } } }
+            },
+            background: { color: "#050505" }
+        });
+
+        // --- MAILER SCRIPT ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true; btn.innerText = "Sending...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    btn.innerText = "Message Sent!"; btn.style.background = "#2ecc71";
+                    setTimeout(() => { closeMail(); form.reset(); btn.disabled = false; btn.innerText = "Send Message"; btn.style.background = ""; }, 2500);
+                })
+                .catch(error => { btn.innerText = "Error! Try again."; btn.disabled = false; btn.style.background = "#e74c3c"; });
+        });
+
+        // --- UTILS ---
+        function openMail() { document.getElementById("contactModal").style.display = "flex"; }
+        function closeMail() { document.getElementById("contactModal").style.display = "none"; }
+        window.onclick = function(event) { if (event.target == document.getElementById("contactModal")) { closeMail(); } }
+        window.onload = function() { setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300); };
+    </script>
+</body>
+</html>
