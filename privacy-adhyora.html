@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Adhyora</title>
+    
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- 1. GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* ADHYORA GREEN THEME */
+            --theme-color: #2ecc71; 
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(20, 20, 20, 0.7);
+            --text-light: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; }
+
+        /* --- HEADER --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%; 
+            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        nav img { height: 50px; width: auto; transition: 0.3s; }
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
+        nav a:hover { color: var(--theme-color); }
+
+        @media (max-width: 600px) {
+            nav { height: 60px; padding: 0 3%; }
+            nav img { height: 35px; }
+            nav ul { gap: 12px; }
+            nav a { font-size: 0.85rem; }
+        }
+
+        /* --- GLASS CONTENT (UPDATED TRANSPARENCY) --- */
+        .legal-container {
+            max-width: 900px; width: 92%; margin: 150px auto 100px; padding: 50px;
+            
+            /* Changed from 0.4 to 0.2 for more transparency */
+            background: rgba(10, 10, 10, 0.2); 
+            
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            position: relative; z-index: 2;
+            overflow-wrap: break-word; word-wrap: break-word;
+        }
+
+        .legal-container p, .legal-container li { font-style: italic; color: rgba(255, 255, 255, 0.9); margin-bottom: 20px; font-size: 1.05rem; }
+        h1 { color: var(--theme-color); font-size: 2.5rem; margin-bottom: 30px; border-bottom: 2px solid var(--theme-color); display: inline-block; }
+        h2 { color: var(--theme-color); margin-top: 40px; font-size: 1.8rem; }
+        a { color: var(--theme-color); text-decoration: none; transition: 0.5s ease; }
+        strong { color: #fff; font-style: normal; }
+
+        @media (max-width: 600px) {
+            .legal-container { margin-top: 100px; padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 1.8rem; margin-bottom: 20px; }
+            h2 { font-size: 1.4rem; margin-top: 30px; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(15px);
+            padding: 80px 10% 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; z-index: 2;
+        }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--theme-color); text-shadow: 0 0 15px var(--theme-color); }
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--theme-color); transform: scale(1.2); }
+        
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+        }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(15px); justify-content: center; align-items: center; }
+        .modal-content { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); padding: 30px; border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid var(--theme-color); position: relative; box-shadow: 0 0 30px rgba(0,0,0, 0.5); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .mail-form input, .mail-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none; }
+        .mail-form button { width: 100%; padding: 15px; background: var(--theme-color); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white; }
+    </style>
+</head>
+<body>
+    <div id="tsparticles"></div>
+
+    <nav>
+        <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li> <li><a href="/#divisions">Products</a></li>
+            <li><a href="javascript:void(0)" onclick="openMail()">Contact</a></li> 
+        </ul>
+    </nav>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeMail()">&times;</span>
+            <h2 style="text-align:center; color:var(--theme-color);">Send us a Message</h2>
+            <form id="contactForm" class="mail-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
+                <button type="submit" id="submitBtn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="legal-container">
+    <h1>Privacy Policy for Adhyora</h1>
+    <p><strong>Effective Date:</strong> January 1, 2026</p>
+
+    <h2>1. Introduction</h2>
+    <p>This Privacy Policy explains how <strong>Pixelaks Technologies</strong> collects, uses, stores, and protects information within the <strong>Adhyora</strong> Academic Management System. By using Adhyora, the Institution and its authorized users agree to the data practices described in this Policy.</p>
+
+    <h2>2. Relationship Disclosure</h2>
+    <p>For the purposes of this Privacy Policy, <strong>the Institution is the Data Controller</strong> and retains full ownership and authority over all academic and personal data entered into Adhyora. <strong>Pixelaks Technologies operates as the Data Processor</strong> and processes this data solely on behalf of the Institution, according to the Institution’s instructions and the intended operation of the platform.</p>
+
+    <h2>3. Information We Collect</h2>
+    <p>Adhyora collects and processes information strictly for academic and administrative purposes:</p>
+    <ul>
+        <li><strong>Principal/Admin Data:</strong> Name, email, department, login activity, and administrative actions.</li>
+        <li><strong>Faculty/Teacher Data:</strong> Name, department, subject assignments, attendance entries, marks, schedules.</li>
+        <li><strong>Student Data:</strong> Name, institutional ID, department/year, attendance records, internal marks, academic records.</li>
+        <li><strong>Authentication & Device Info:</strong> Device identifiers (FCM tokens), OS version, and security logs to ensure proper access and notifications.</li>
+    </ul>
+
+    <h2>4. Purpose of Data Processing</h2>
+    <p>Pixelaks Technologies processes data strictly to provide and improve the Adhyora service:</p>
+    <ul>
+        <li><strong>Attendance Management:</strong> Processing attendance entries and generating percentages.</li>
+        <li><strong>Internal Evaluation:</strong> Recording Continuous Evaluation (CE) marks and generating academic reports.</li>
+        <li><strong>Role-Based Access:</strong> Ensuring each user only accesses data relevant to their role.</li>
+        <li><strong>Notifications:</strong> Sending important academic and administrative updates.</li>
+        <li><strong>Institutional Monitoring:</strong> Allowing Admins to oversee academic activity across the campus.</li>
+    </ul>
+
+    <h2>5. Data Sharing and Third Parties</h2>
+    <p>Pixelaks Technologies does <strong>not</strong> sell, rent, or share institutional data with any third-party advertisers, analytics services, or external organizations.</p>
+    <p>Data is shared only in these cases:</p>
+    <ul>
+        <li><strong>Cloud Infrastructure:</strong> Adhyora uses <strong>Google Firebase</strong> for secure hosting, authentication, and notifications. Firebase processes data under strict confidentiality and security standards.</li>
+        <li><strong>Legal Compliance:</strong> Data may be disclosed if required by law, government orders, or valid legal processes.</li>
+    </ul>
+
+    <h2>6. Data Security Measures</h2>
+    <ul>
+        <li><strong>Encryption:</strong> All data is encrypted in transit and at rest using industry-standard methods.</li>
+        <li><strong>Data Isolation:</strong> Each institution’s data is securely partitioned to prevent unauthorized access.</li>
+        <li><strong>Access Rules:</strong> Strict role-based permissions ensure only authorized users access sensitive information.</li>
+        <li><strong>Monitoring:</strong> Continuous monitoring is in place to detect unauthorized activity and ensure system integrity.</li>
+    </ul>
+
+    <h2>7. Data Retention and Deletion</h2>
+    <p>Data is retained for as long as the Institution maintains an active subscription. Upon a written request from the Principal or Admin, Pixelaks Technologies will delete all institutional data from our systems within 30 days.</p>
+    <p>If the subscription remains inactive for more than 30 days, data may be permanently deleted as outlined in the Terms of Service.</p>
+
+    <h2>8. User Rights (DPDPA Compliance)</h2>
+    <p>Under the Digital Personal Data Protection Act (DPDPA), users have the right to:</p>
+    <ul>
+        <li>Access their personal information.</li>
+        <li>Request correction of inaccurate data.</li>
+    </ul>
+    <p>Since the Institution is the Data Controller, users should contact their Institution’s administrative office for requests related to data correction or deletion.</p>
+
+    <h2>9. Data Loss Disclaimer</h2>
+    <p>While strong security and redundancy measures are in place, no digital platform can guarantee absolute protection against data loss, corruption, or technical failures. Pixelaks Technologies is not responsible for losses arising from outages, server failures, cyberattacks, or events beyond reasonable control.</p>
+
+    <h2>10. Cookies & Analytics</h2>
+    <p>The Adhyora mobile and web applications do <strong>not</strong> use cookies, advertising trackers, or third-party analytics tools that collect personal data.</p>
+
+    <h2>11. Discontinuation of Service</h2>
+    <p>If the Adhyora service is permanently discontinued, the Institution will be notified in advance and provided an opportunity to export all academic data before shutdown.</p>
+
+    <h2>12. Changes to This Privacy Policy</h2>
+    <p>Pixelaks Technologies may update this Privacy Policy occasionally. Institutions will be notified of significant updates. Continued use of Adhyora following such updates constitutes acceptance of the revised Policy.</p>
+
+    <h2>13. Contact Us</h2>
+    <p>If you have any questions or concerns about this Privacy Policy or how your data is handled, you may contact us at:</p>
+    <p><strong>Email:</strong> pixelaks.technologies@gmail.com</p>
+</div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-left">
+                <h3>Pixelaks Technologies</h3>
+                <p style="font-style: italic; color: #aaa; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
+                <p id="footer-email" onclick="openMail()">pixelaks.technologies@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pixelaksofficial?igsh=eHNhcmYwMnNkcTYx" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+    
+            <div class="footer-right">
+                <h4>Navigation</h4>
+                <a href="/">Home</a>
+                <a href="/#about">About Us</a> <a href="/#divisions">Products</a>
+                <a href="privacy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
+            </div>
+        </div>
+        <p style="text-align:center; color:#555; margin-top:60px; font-style: normal !important;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        // --- GREEN PARTICLES FOR ADHYORA ---
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 100, density: { enable: true, area: 800 } },
+                color: { value: "#2ecc71" }, // GREEN
+                links: { enable: true, distance: 150, color: "#2ecc71", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 1.5, outModes: { default: "out" } },
+                opacity: { value: 0.5 },
+                size: { value: { min: 1, max: 4 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 250, links: { opacity: 0.7 } } }
+            },
+            background: { color: "#050505" }
+        });
+
+        // --- MAILER SCRIPT ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true; btn.innerText = "Sending...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    btn.innerText = "Message Sent!"; btn.style.background = "#2ecc71";
+                    setTimeout(() => { closeMail(); form.reset(); btn.disabled = false; btn.innerText = "Send Message"; btn.style.background = ""; }, 2500);
+                })
+                .catch(error => { btn.innerText = "Error! Try again."; btn.disabled = false; btn.style.background = "#e74c3c"; });
+        });
+
+        // --- UTILS ---
+        function openMail() { document.getElementById("contactModal").style.display = "flex"; }
+        function closeMail() { document.getElementById("contactModal").style.display = "none"; }
+        window.onclick = function(event) { if (event.target == document.getElementById("contactModal")) { closeMail(); } }
+        window.onload = function() { setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300); };
+    </script>
+</body>
+</html>
