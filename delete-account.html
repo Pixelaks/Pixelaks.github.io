@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Deletion - Adhyora</title>
+    
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* ADHYORA GREEN THEME */
+            --theme-color: #2ecc71; 
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(20, 20, 20, 0.85); /* Slightly darker for better mobile read */
+            --text-light: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: 1; }
+
+        /* --- HEADER --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%; 
+            background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        nav img { height: 50px; width: auto; transition: 0.3s; }
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
+        nav a:hover { color: var(--theme-color); }
+
+        /* Mobile Header Adjustments */
+        @media (max-width: 600px) {
+            nav { height: 60px; padding: 0 5%; }
+            nav img { height: 35px; }
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.9rem; }
+        }
+
+        /* --- GLASS CONTENT --- */
+        .legal-container {
+            max-width: 800px; width: 92%; margin: 150px auto 100px; padding: 50px;
+            background: rgba(10, 10, 10, 0.3); 
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            position: relative; z-index: 2;
+            overflow-wrap: break-word; word-wrap: break-word;
+        }
+
+        .legal-container p, .legal-container li { 
+            color: rgba(255, 255, 255, 0.85); 
+            margin-bottom: 15px; 
+            font-size: 1.05rem; 
+        }
+        
+        h1 { color: var(--theme-color); font-size: 2.2rem; margin-bottom: 30px; border-bottom: 2px solid var(--theme-color); display: inline-block; }
+        h2 { color: #fff; margin-top: 40px; margin-bottom: 15px; font-size: 1.4rem; border-left: 4px solid var(--theme-color); padding-left: 15px; }
+        
+        /* Interactive Link Style */
+        .action-link { 
+            color: var(--theme-color); 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-decoration: underline; 
+            transition: 0.3s;
+        }
+        .action-link:hover { color: #fff; text-shadow: 0 0 10px var(--theme-color); }
+
+        /* Highlight Box */
+        .note-box {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--theme-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        /* Mobile Content Adjustments */
+        @media (max-width: 600px) {
+            .legal-container { margin-top: 100px; padding: 30px 20px; border-radius: 20px; }
+            h1 { font-size: 1.8rem; margin-bottom: 20px; }
+            h2 { font-size: 1.3rem; margin-top: 30px; padding-left: 10px; border-width: 3px; }
+            .legal-container p, .legal-container li { font-size: 0.95rem; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(15px);
+            padding: 80px 10% 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; z-index: 2;
+        }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; }
+        .footer-left { flex: 1; min-width: 300px; }
+        .footer-right { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+        .footer-right h4 { color: #fff; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
+        .footer-right a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-right a:hover { color: white; padding-left: 10px; }
+        #footer-email { color: #fff; cursor: pointer; display: inline-block; transition: 0.4s ease; font-weight: 500; word-break: break-all; }
+        #footer-email:hover { color: var(--theme-color); text-shadow: 0 0 15px var(--theme-color); }
+        .social-icons a { color: white; font-size: 1.8rem; margin-right: 25px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--theme-color); transform: scale(1.2); }
+        
+        @media (max-width: 850px) {
+            .footer-grid { flex-direction: column; gap: 40px; }
+            footer { padding: 60px 5% 40px; }
+            .footer-left { min-width: 100%; }
+        }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; backdrop-filter: blur(10px); justify-content: center; align-items: center; }
+        .modal-content { background: rgba(30, 30, 30, 0.95); padding: 30px; border-radius: 25px; width: 90%; max-width: 500px; border: 1px solid var(--theme-color); position: relative; box-shadow: 0 0 40px rgba(0,0,0, 0.7); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #fff; }
+        .mail-form input, .mail-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; outline: none; font-family: inherit; font-size: 1rem; }
+        .mail-form button { width: 100%; padding: 15px; background: var(--theme-color); border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; color: white; font-size: 1rem; }
+        .mail-form button:disabled { background: #555; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div id="tsparticles"></div>
+
+    <nav>
+        <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="terms">Terms</a></li>
+            <li><a href="javascript:void(0)" onclick="openMail('general')">Contact</a></li> 
+        </ul>
+    </nav>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeMail()">&times;</span>
+            <h2 style="text-align:center; color:var(--theme-color); border:none; padding:0; margin-bottom:20px;">Support Request</h2>
+            <form id="contactForm" class="mail-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" id="msgArea" rows="6" placeholder="How can we help?" required></textarea>
+                <button type="submit" id="submitBtn">Send Request</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="legal-container">
+        <h1>Account Deletion Request</h1>
+        
+        <p>Adhyora is an Institutional Management System designed for Colleges. Because your academic records (Attendance, Marks, Enrollments) are legal documents owned by your Institution, <strong>individual users cannot unilaterally delete their data</strong> without administrative approval.</p>
+
+        <div class="note-box">
+            <strong>Data Deletion Timeline:</strong> Once authorized by the College, your personal data will be permanently removed from our active databases within <strong>30 days</strong>.
+        </div>
+
+        <h2>For Students & Teachers</h2>
+        <p>Your account is managed directly by your College Administration. To request deletion:</p>
+        <ol>
+            <li>Contact your <strong>Head of Department (HOD)</strong> or the <strong>College Principal</strong>.</li>
+            <li>Request them to "Remove User" from the Adhyora Dashboard.</li>
+            <li>Once they perform this action, your login access is revoked immediately, and data deletion begins.</li>
+        </ol>
+
+        <h2>For Principals / Admins</h2>
+        <p>If you wish to terminate your entire Institution's account with Adhyora, please contact us directly.</p>
+        <p>You can email us at <span class="action-link" onclick="openMail('admin')">support@pixelaks.in</span> or use the contact form to initiate the termination process.</p>
+
+        <h2>Can't Contact your College?</h2>
+        <p>If you have left the institution and they are refusing to remove your personal data, or if the institution is no longer active, we can help.</p>
+        <p>Please <span class="action-link" onclick="openMail('student')">Click Here to Open a Support Ticket</span>.</p>
+        <p>In your message, please provide:</p>
+        <ul style="margin-left: 20px;">
+            <li>Name of the College</li>
+            <li>Your Roll Number / Staff ID</li>
+            <li>Reason for deletion request</li>
+        </ul>
+        <p>We will verify your identity and contact the institution on your behalf to process the deletion.</p>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-left">
+                <h3>Pixelaks Technologies</h3>
+                <p style="font-style: italic; color: #aaa; margin-bottom: 15px;">Innovative software and gaming experiences.</p>
+                <p id="footer-email" onclick="openMail('general')">pixelaks.technologies@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/pixelaksofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/anagh-k-satheesh-3914b0253" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <h4>Navigation</h4>
+                <a href="/">Home</a>
+                <a href="/#about">About Us</a>
+                <a href="/#divisions">Products</a>
+                <a href="privacy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
+            </div>
+        </div>
+        <p style="text-align:center; color:#555; margin-top:60px;">&copy; 2026 Pixelaks Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        // --- GREEN PARTICLES CONFIG ---
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 70, density: { enable: true, area: 800 } },
+                color: { value: "#2ecc71" },
+                links: { enable: true, distance: 150, color: "#2ecc71", opacity: 0.3, width: 1 },
+                move: { enable: true, speed: 1, outModes: { default: "out" } },
+                opacity: { value: 0.5 },
+                size: { value: { min: 1, max: 3 } }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" } },
+                modes: { grab: { distance: 200, links: { opacity: 0.6 } } }
+            },
+            background: { color: "#050505" }
+        });
+
+        // --- MAILER SCRIPT ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ056QMv8SFcPpZssWUrVf8sl5Dz-suh3ZJ6K7JbiC9m5EXzzR_HnbYxyssVxathSDtA/exec';
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true; btn.innerText = "Processing...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    btn.innerText = "Request Sent!"; btn.style.background = "#2ecc71";
+                    setTimeout(() => { closeMail(); form.reset(); btn.disabled = false; btn.innerText = "Send Request"; btn.style.background = ""; }, 2500);
+                })
+                .catch(error => { btn.innerText = "Error! Try again."; btn.disabled = false; btn.style.background = "#e74c3c"; });
+        });
+
+        // --- UTILS (MODIFIED) ---
+        
+        // Accepted types: 'general', 'admin', 'student'
+        function openMail(type) {
+            const msgArea = document.getElementById("msgArea");
+            
+            if (type === 'admin') {
+                // Admin: Needs College Name only
+                msgArea.value = "I request termination of my Institution's account.\n\nCollege Name: \nReason for leaving: ";
+                msgArea.placeholder = "Please provide your college details...";
+            } 
+            else if (type === 'student') {
+                // Student: Needs College AND Roll No
+                msgArea.value = "I request deletion of my account because: \n\nCollege Name: \nRoll Number / ID: ";
+                msgArea.placeholder = "Please explain why you need account deletion...";
+            } 
+            else {
+                // General (Nav/Footer): Standard
+                msgArea.value = "";
+                msgArea.placeholder = "How can we help?";
+            }
+            
+            document.getElementById("contactModal").style.display = "flex";
+        }
+
+        function closeMail() { 
+            document.getElementById("contactModal").style.display = "none"; 
+        }
+
+        window.onclick = function(event) { 
+            if (event.target == document.getElementById("contactModal")) { closeMail(); } 
+        }
+        
+        window.onload = function() { 
+            setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 300); 
+        };
+    </script>
+</body>
+</html>
