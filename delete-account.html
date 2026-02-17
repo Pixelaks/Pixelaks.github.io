@@ -16,7 +16,7 @@
             /* ADHYORA GREEN THEME */
             --theme-color: #2ecc71; 
             --dark-bg: #0a0a0a;
-            --glass-bg: rgba(20, 20, 20, 0.85); /* Slightly darker for better mobile read */
+            --glass-bg: rgba(20, 20, 20, 0.85);
             --text-light: #ffffff;
         }
 
@@ -41,16 +41,16 @@
             z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         nav img { height: 50px; width: auto; transition: 0.3s; }
-        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
         nav a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
         nav a:hover { color: var(--theme-color); }
 
         /* Mobile Header Adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             nav { height: 60px; padding: 0 5%; }
             nav img { height: 35px; }
             nav ul { gap: 15px; }
-            nav a { font-size: 0.9rem; }
+            nav a { font-size: 0.85rem; }
         }
 
         /* --- GLASS CONTENT --- */
@@ -142,6 +142,8 @@
         <div class="nav-brand"><img src="logo.png" alt="Pixelaks"></div>
         <ul>
             <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#divisions">Products</a></li>
             <li><a href="terms">Terms</a></li>
             <li><a href="javascript:void(0)" onclick="openMail('general')">Contact</a></li> 
         </ul>
@@ -251,7 +253,7 @@
                 .catch(error => { btn.innerText = "Error! Try again."; btn.disabled = false; btn.style.background = "#e74c3c"; });
         });
 
-        // --- UTILS (MODIFIED) ---
+        // --- UTILS (LOGIC FIXED) ---
         
         // Accepted types: 'general', 'admin', 'student'
         function openMail(type) {
